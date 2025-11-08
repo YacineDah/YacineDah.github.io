@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nashwa - MA trial</title>
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg: #ffffff;
+      --text: #0f172a; /* slate-900 */
+      --muted: #64748b; /* slate-500 */
+      --card: #ffffff;
+      --border: #e2e8f0; /* slate-200 */
+      --ring: #93c5fd;   /* blue-300 */
+      --accent-1: #6366f1; /* indigo-500 */
+      --accent-2: #3b82f6; /* blue-500 */
+      --accent-3: #a78bfa; /* violet-400 */
+      --shadow: 0 10px 30px rgba(2, 6, 23, .06), 0 2px 6px rgba(2,6,23,.03);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --radius-xs: 10px;
+    }
+
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; background:var(--bg); color:var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    }
+
+    /* Subtle gradient header */
+    .hero{
+      position:relative; isolation:isolate; overflow:hidden;
+      background: radial-gradient(1200px 400px at 70% -50%, rgba(99,102,241,.18), transparent 60%),
+                  radial-gradient(900px 400px at 0% 0%, rgba(59,130,246,.18), transparent 60%),
+                  linear-gradient(180deg, #f8fafc 0%, #ffffff 60%);
+      border-bottom:1px solid var(--border);
+    }
+    .container{max-width:1200px; margin-inline:auto; padding:24px;}
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px; padding:12px 0;
+    }
+    .brand{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:-.02em}
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background: conic-gradient(from 160deg, var(--accent-1), var(--accent-2), var(--accent-3), var(--accent-1));
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.8), 0 6px 20px rgba(99,102,241,.25);
+    }
+    .brand-text{background:linear-gradient(90deg,var(--accent-2),var(--accent-1)); -webkit-background-clip:text; background-clip:text; color:transparent}
+
+    .hero-main{padding:32px 0 24px}
+    .headline{font-size:clamp(28px, 3.6vw, 44px); font-weight:800; letter-spacing:-.03em; margin:0}
+    .sub{color:var(--muted); font-size:clamp(14px, 2vw, 16px); max-width:820px; margin-top:10px}
+
+    /* Stat cards */
+    .stats{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; margin:28px 0 8px}
+    .stat{
+      background:var(--card); border:1px solid var(--border); border-radius:var(--radius);
+      padding:16px 18px; box-shadow:var(--shadow);
+    }
+    .stat .label{color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.08em}
+    .stat .value{font-weight:800; font-size:22px; margin-top:6px}
+
+    /* Controls */
+    .controls{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin:20px 0 8px}
+    .tabs{display:flex; background:#f1f5f9; border:1px solid var(--border); padding:6px; border-radius:999px}
+    .tab{
+      appearance:none; border:0; background:transparent; padding:8px 14px; border-radius:999px; font-weight:600; color:#475569; cursor:pointer;
+    }
+    .tab[aria-selected="true"]{background:#fff; color:var(--text); box-shadow:var(--shadow)}
+
+    .search{position:relative; flex:1 1 300px}
+    .search input{
+      width:100%; padding:12px 14px 12px 40px; border-radius:12px; border:1px solid var(--border); background:#fff; box-shadow:var(--shadow);
+      font:inherit; outline:none;
+    }
+    .search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); opacity:.6}
+
+    .segmented{display:flex; gap:8px;}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; cursor:pointer; font-weight:600;
+      box-shadow:var(--shadow);
+    }
+    .btn:hover{box-shadow:0 12px 24px rgba(2,6,23,.08), 0 2px 6px rgba(2,6,23,.04)}
+    .btn .caret{transition:transform .15s ease}
+    .btn[aria-pressed="true"] .caret{transform:rotate(180deg)}
+
+    /* Card + Table */
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow)}
+    .card-header{display:flex; align-items:center; justify-content:space-between; padding:16px 18px; border-bottom:1px solid var(--border)}
+    .card-title{font-weight:700}
+
+    .table-wrap{overflow:auto; border-radius:0 0 var(--radius) var(--radius)}
+    table{width:100%; border-collapse:separate; border-spacing:0}
+    thead th{
+      position:sticky; top:0; background:#ffffffcc; backdrop-filter:saturate(1.2) blur(6px);
+      text-align:left; font-size:13px; color:#475569; letter-spacing:.04em; text-transform:uppercase; padding:14px 16px; border-bottom:1px solid var(--border); z-index:1
+    }
+    tbody td{padding:16px; vertical-align:top; border-bottom:1px solid var(--border); font-size:15px}
+    tbody tr:hover{background:#f8fafc}
+    .col-center{text-align:center}
+
+    .badge{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--border); border-radius:999px; padding:4px 10px; font-size:12px; color:#334155; background:#fff}
+    .badge-dot{width:8px; height:8px; border-radius:999px; background:var(--accent-2); box-shadow:0 0 0 4px rgba(59,130,246,.12)}
+
+    .shops{display:flex; flex-direction:column; gap:8px; padding-left:0; margin:0; list-style:none}
+    .shops a{color:var(--accent-2); text-decoration:none; font-weight:600}
+    .shops a:hover{text-decoration:underline}
+    .muted{color:var(--muted)}
+
+    .footer{padding:30px 0 60px; color:#94a3b8; font-size:14px; text-align:center}
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+    @media (max-width: 640px){
+      .nav{flex-direction:column; align-items:flex-start}
+      .controls{flex-direction:column; align-items:stretch}
+      .card-header{flex-direction:column; align-items:flex-start; gap:8px}
+    }
+    /* Dropdown effect for shop table */
+.table-container {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.table-container.open {
+  max-height: 500px; /* adjust if table is bigger */
+  opacity: 1;
+}
+
+.card-header {
+  cursor: pointer;
+}
+
+.arrow {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.3s ease;
+  font-size: 14px;
+}
+
+.arrow.open {
+  transform: rotate(90deg);
+}
+  </style>
+</head>
+<body>
+  <!-- Header / Hero -->
+  <header class="hero">
+    <div class="container">
+      <div class="nav" role="navigation" aria-label="Top Navigation" style="height: 60px;box-sizing: content-box;">
+        <div class="brand" aria-label="Brand">
+            <!-- <img src="https://raw.githubusercontent.com/YacineDah/YacineDah.github.io/refs/heads/main/logo.png" style="width: 140px;height: 140px;"> -->
+            <img src="https://iili.io/K3O7UZv.png" alt="K3O7UZv.png" border="0" style="width: 140px;height: 140px;">
+        </div>
+      </div>
+
+      <div class="hero-main">
+        <h1 class="headline" style="text-align: center;">AI Tech to find your <span class="brand-text">Winning Product & Creative</span>.</h1>
+        <p class="sub" style="text-align: center; justify-self: center;">#1 Algerian Market Suitable AI Tech Spy Tool. find winning products, creatives, pricing, competetors, niches, marketing angles & more.</p>
+
+        <!-- Stats -->
+        <section class="stats" aria-label="Summary statistics">
+          <div class="stat" role="status">
+            <div class="label">Total Ads</div>
+            <div class="value">20</div>
+          </div>
+          <div class="stat" role="status">
+            <div class="label">Products</div>
+            <div class="value">17</div>
+          </div>
+          <div class="stat" role="status">
+            <div class="label">Shops</div>
+            <div class="value">17</div>
+          </div>
+          <div class="stat" role="status">
+            <div class="label">Categories</div>
+            <div class="value">8</div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Shop results tally -->
+      <!-- Shop results tally -->
+<div class="card" aria-label="Shop Ad Counts">
+  <div class="card-header" onclick="toggleShopTable(this)">
+    <div class="card-title">
+      All Shops View
+    </div>
+    <svg class="arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"xmlns="http://www.w3.org/2000/svg"><path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+  <div class="table-container">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Shop</th>
+            <th class="col-center">Ads</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+            <tr>
+              <td style="font-weight:600">Monlavage</td>
+              <td class="col-center">3</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">MadiShop</td>
+              <td class="col-center">2</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Prixmark.ma</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Luxe Decor</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">frag_shop</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Cristal Déco</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Nordin saidi05</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">I CAN SHOPE 1</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Wummo shop</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Cosme-téc</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Krimall</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Animal Motion</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Tiravona parfums</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Amiiin Shop</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Vamox</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Sultani</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Mobilia Triangle d'Or</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+      <!-- Controls -->
+      <div class="controls" role="region" aria-label="Controls">
+        <div class="tabs" role="tablist" aria-label="View selector">
+          <button id="tabProducts" class="tab" role="tab" aria-selected="true" aria-controls="panelProducts">Products</button>
+          <button id="tabAdcopy" class="tab" role="tab" aria-selected="false" aria-controls="panelAdcopy">Ad Copy</button>
+        </div>
+
+        <div class="search" role="search" style="display: flex;max-height: min-content;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/></svg>
+          <input id="searchInput" type="search" placeholder="Search product, shop, category, or ad text…" aria-label="Search table" />
+        </div>
+
+        <div class="segmented" aria-label="Sort options" style="display: flow;">
+          <button class="btn" data-sort="days" aria-pressed="false" title="Sort by days running">
+            <svg class="caret" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 10l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Days Running
+          </button>
+          <button class="btn" data-sort="occ" aria-pressed="false" title="Sort by occurrences">
+            <svg class="caret" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 10l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Occurrences
+          </button>
+          <button class="btn" data-sort="cat" aria-pressed="false" title="Sort by category">
+            <svg class="caret" width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M7 10l5-5 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Category
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Table Card -->
+  <main class="container" style="margin-top:18px;">
+    <section id="panelProducts" role="tabpanel" aria-labelledby="tabProducts">
+      <div class="card">
+        <div class="card-header"><div class="card-title">Products</div><p>Results From: 2025-11-08</p></div>
+        <div class="table-wrap">
+          <table id="productsTable">
+            <thead>
+              <tr>
+                <th scope="col">Product</th>
+                <th scope="col">Shops</th>
+                <th scope="col">Days Running</th>
+                <th scope="col">Occurrences</th>
+                <th scope="col">Category</th>
+              </tr>
+            </thead>
+            <tbody id="productsBody">
+              
+              <tr data-max-days="1124" data-min-days="1124" data-occ="1" data-cat="عناية أطفال">
+                <td style="font-weight:600">رضاعة أطفال</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://bit.ly/3TbHPGN" target="_blank" rel="noopener">frag_shop</a>
+                        <span class="muted">(1124 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=796358671611306" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>1124</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">عناية أطفال</span></td>
+              </tr>
+              
+              <tr data-max-days="982" data-min-days="982" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">حامل أكواب</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://bit.ly/3xQt6Iw" target="_blank" rel="noopener">Amiiin Shop</a>
+                        <span class="muted">(982 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=3428518424105120" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>982</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="606" data-min-days="606" data-occ="1" data-cat="زينة">
+                <td style="font-weight:600">مبخرة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://nourber1.youcan.store/pages/mbekhra-1" target="_blank" rel="noopener">Nordin saidi05</a>
+                        <span class="muted">(606 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=2239508613059752" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>606</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">زينة</span></td>
+              </tr>
+              
+              <tr data-max-days="505" data-min-days="208" data-occ="2" data-cat="تكنولوجيا">
+                <td style="font-weight:600">كاميرا مراقبة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://www.globo.ma/product-cam-stylo" target="_blank" rel="noopener">MadiShop</a>
+                        <span class="muted">(505 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=994897238683511" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://www.vamox.ma/product-cam-stylo" target="_blank" rel="noopener">Vamox</a>
+                        <span class="muted">(208 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1031647241718048" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge" title="Min–Max days running">
+                      <span class="badge-dot" style="background:var(--accent-1)"></span>
+                      Min 208
+                    </div>
+                    <div class="badge" style="margin-left:8px;" title="Max days running">
+                      <span class="badge-dot"></span>
+                      Max 505
+                    </div>
+                  
+                </td>
+                <td style="font-weight:700">2</td>
+                <td><span class="badge" title="Category">تكنولوجيا</span></td>
+              </tr>
+              
+              <tr data-max-days="477" data-min-days="477" data-occ="1" data-cat="تجميل">
+                <td style="font-weight:600">مصفف شعر</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://lilia-maroc.myshopify.com/products/5x1" target="_blank" rel="noopener">Sultani</a>
+                        <span class="muted">(477 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1469411427278968" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>477</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">تجميل</span></td>
+              </tr>
+              
+              <tr data-max-days="446" data-min-days="446" data-occ="1" data-cat="منزل">
+                <td style="font-weight:600">أثاث منزلي</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://mobilia.ma/" target="_blank" rel="noopener">Mobilia Triangle d'Or</a>
+                        <span class="muted">(446 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1880434012448209" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>446</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">منزل</span></td>
+              </tr>
+              
+              <tr data-max-days="330" data-min-days="330" data-occ="1" data-cat="أدوات">
+                <td style="font-weight:600">مسدس لحام</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://www.globo.ma/product-kawia" target="_blank" rel="noopener">MadiShop</a>
+                        <span class="muted">(330 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1119810672327970" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>330</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات</span></td>
+              </tr>
+              
+              <tr data-max-days="287" data-min-days="287" data-occ="1" data-cat="منزل">
+                <td style="font-weight:600">ماسحة زجاج</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://icanshope.com/products/mnthf-zjaj-alnoafth-almghnatysy-1" target="_blank" rel="noopener">I CAN SHOPE 1</a>
+                        <span class="muted">(287 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1067344658412847" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>287</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">منزل</span></td>
+              </tr>
+              
+              <tr data-max-days="254" data-min-days="254" data-occ="1" data-cat="منزل">
+                <td style="font-weight:600">روبوت تنظيف</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://prixmarkma.myshopify.com/products/robot" target="_blank" rel="noopener">Prixmark.ma</a>
+                        <span class="muted">(254 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=28568077829506071" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>254</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">منزل</span></td>
+              </tr>
+              
+              <tr data-max-days="188" data-min-days="188" data-occ="1" data-cat="تجميل">
+                <td style="font-weight:600">عطور</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://tiravona.com/tiravona/" target="_blank" rel="noopener">Tiravona parfums</a>
+                        <span class="muted">(188 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=598395739190347" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>188</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">تجميل</span></td>
+              </tr>
+              
+              <tr data-max-days="161" data-min-days="161" data-occ="1" data-cat="أدوات">
+                <td style="font-weight:600">مزيل شعر</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://animalmotion.shop/products/catpack1" target="_blank" rel="noopener">Animal Motion</a>
+                        <span class="muted">(161 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1128931315665766" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>161</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات</span></td>
+              </tr>
+              
+              <tr data-max-days="158" data-min-days="158" data-occ="1" data-cat="علاج">
+                <td style="font-weight:600">خل الهندية</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://marocainee.youcan.store/pages/khel-hendia" target="_blank" rel="noopener">Cosme-téc</a>
+                        <span class="muted">(158 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=613694928398104" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>158</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">علاج</span></td>
+              </tr>
+              
+              <tr data-max-days="138" data-min-days="138" data-occ="1" data-cat="زينة">
+                <td style="font-weight:600">مرايات</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://decorwummo.shop/products/miroircr-2025" target="_blank" rel="noopener">Wummo shop</a>
+                        <span class="muted">(138 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1046615300912929" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>138</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">زينة</span></td>
+              </tr>
+              
+              <tr data-max-days="129" data-min-days="129" data-occ="1" data-cat="منزل">
+                <td style="font-weight:600">دولاب ملابس</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://luxdecoor.com/products/khzan-almlabs-o-mnthm-alahthy-altoyl" target="_blank" rel="noopener">Luxe Decor</a>
+                        <span class="muted">(129 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=24115665374695615" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>129</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">منزل</span></td>
+              </tr>
+              
+              <tr data-max-days="123" data-min-days="123" data-occ="1" data-cat="زينة">
+                <td style="font-weight:600">ثريات</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://api.whatsapp.com/send" target="_blank" rel="noopener">Cristal Déco</a>
+                        <span class="muted">(123 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1101419985207584" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>123</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">زينة</span></td>
+              </tr>
+              
+              <tr data-max-days="123" data-min-days="123" data-occ="1" data-cat="منزل">
+                <td style="font-weight:600">مكنسة كهربائية</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://api.whatsapp.com/send" target="_blank" rel="noopener">Krimall</a>
+                        <span class="muted">(123 days • 1 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=753843237201535" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>123</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">منزل</span></td>
+              </tr>
+              
+              <tr data-max-days="106" data-min-days="106" data-occ="3" data-cat="أدوات سيارة">
+                <td style="font-weight:600">مزيل خدوش</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://monlavage.shop/products/scratch-removers" target="_blank" rel="noopener">Monlavage</a>
+                        <span class="muted">(106 days • 3 duplicates)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=624183780720295" target="_blank" rel="noopener" class="muted">(creative)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>106</div>
+                  
+                </td>
+                <td style="font-weight:700">3</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="panelAdcopy" role="tabpanel" aria-labelledby="tabAdcopy" hidden>
+      <div class="card">
+        <div class="card-header"><div class="card-title">Ad Copy</div></div>
+        <div class="table-wrap">
+          <table id="adcopyTable">
+            <thead>
+              <tr>
+                <th scope="col">Shop</th>
+                <th scope="col">Ad Copy</th>
+                <th scope="col">Days Running</th>
+                <th scope="col">Occurrences</th>
+              </tr>
+            </thead>
+            <tbody id="adcopyBody">
+              
+              <tr data-days="106" data-occ="3" data-cat="">
+                <td style="font-weight:600"><a href="https://monlavage.shop/products/scratch-removers" target="_blank" rel="noopener">Monlavage</a></td>
+                <td>🚗 عندك خدوش صغيرة فالسيارة ديالك؟ Monlavage جابت ليك الحل لي كتحيد الخدوش بيدك فـ أقل من دقيقة🧴 كريم Scratch Remover✅ كيمحي الخدوش الخفيفة من أول استعمال✅ ما كيتطلب لا معدات ولا تعب✅ كيعطي لمعان طبيعي بلا ما تمشي عند الطولي!⏱️ استعملو فـ دقيقة وشوف الفرق قدّام عينيك📦 التوصيل حتى لباب دارك💸 الدفع عند الاستلامSorry, we're having trouble playing this video.Learn moreMONLAVAGE.SHOPمزيل خدوش السيارةShop now <a href="https://www.facebook.com/ads/library/?id=624183780720295" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>106</td>
+                <td style="font-weight:700">3</td>
+              </tr>
+              
+              <tr data-days="505" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://www.globo.ma/product-cam-stylo" target="_blank" rel="noopener">MadiShop</a></td>
+                <td>كاميرا مراقبة لاسلكية صغيرة 📹 🔥🔥✅ - فيديو: HD✅  وظيفة التسجيل الصوتي✅  وظيفة كاميرا الكمبيوتر✅  مدة الشحن: حوالي 3 ساعات✅  وظيفة ضبط الوقت✅  فتحة Micro SD المتاحة✅  يوجد فتحة Micro SD (تصل إلى 64 جيجابايت)اطلب المنتج الان و غادي تستافد من توصيل بالمجان حتى لباب داركSorry, we're having trouble playing this video.Learn moreWWW.GLOBO.MAكاميرا مراقبة لاسلكية صغيرةالتوصيل بالمجانShop now <a href="https://www.facebook.com/ads/library/?id=994897238683511" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>505</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="254" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://prixmarkma.myshopify.com/products/robot" target="_blank" rel="noopener">Prixmark.ma</a></td>
+                <td>✨ اكتشف الروبوت الذكي لتنظيف منزلك بكل سهولة! ✨Sorry, we're having trouble playing this video.Learn morePRIXMARKMA.MYSHOPIFY.COM✅ ثمن الجملة ✅Shop now <a href="https://www.facebook.com/ads/library/?id=28568077829506071" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>254</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="129" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://luxdecoor.com/products/khzan-almlabs-o-mnthm-alahthy-altoyl" target="_blank" rel="noopener">Luxe Decor</a></td>
+                <td>📦 بغيت ترتّب دارك بلا صداع؟ الحل بين يديك!  دولاب للملابس + منظم للأحدية... كلشي فـ عرض واحد 🔥  ✅ كيساع بزاف وكينفع أكثر  ✅ تصميم زوين وكيحمي من الغبرة  ✅ سهل فالتركيب والتنظيف  💸 الثمن؟ غير 399 درهم  🚚 والتوصيل؟ فابور حتى لباب دارك   + 10 علاقات 😍Sorry, we're having trouble playing this video.Learn moreLUXDECOOR.COM+ 10 علاقات 😍Order now <a href="https://www.facebook.com/ads/library/?id=24115665374695615" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>129</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="1124" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://bit.ly/3TbHPGN" target="_blank" rel="noopener">frag_shop</a></td>
+                <td>المنتج الذي تحتاجه كل الامهات😍رضاعة الأطفال مع ملعقةمقاومة للانسكار لتخزين طعام الطفل وتغذيتهالثمن 199 درهم  عوض 349 درهم  و التوصيل فابور تال باب دارك فينما كنتي فالمغرب كامل🚚 <a href="https://www.facebook.com/ads/library/?id=796358671611306" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>1124</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="123" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://api.whatsapp.com/send" target="_blank" rel="noopener">Cristal Déco</a></td>
+                <td>😍 4 ثريات ب 799 درهم فقط 😍📌 بهاد البرومو غاتفرش دارك كاملة 📌Sorry, we're having trouble playing this video.Learn moreAPI.WHATSAPP.COM➡➡➡Shop now <a href="https://www.facebook.com/ads/library/?id=1101419985207584" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>123</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="606" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://nourber1.youcan.store/pages/mbekhra-1" target="_blank" rel="noopener">Nordin saidi05</a></td>
+                <td>زيني دارك بمبيخرة  تقليدية بمضهرعصري🥰😍Sorry, we're having trouble playing this video.Learn moreNOURBER1.YOUCAN.STORENordin saidi05Order now <a href="https://www.facebook.com/ads/library/?id=2239508613059752" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>606</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="287" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://icanshope.com/products/mnthf-zjaj-alnoafth-almghnatysy-1" target="_blank" rel="noopener">I CAN SHOPE 1</a></td>
+                <td>هل تعبت من تنظيف الزجاج وصعوبة الوصول للجهة الأخرى؟ 😩ماسحة الزجاج المغناطيسية هي الحل المثالي لك! 🪟بفضل تصميمها الذكي، يمكنك تنظيف الجهتين بسهولة وبدون عناء.مناسبة للنوافذ العادية والزجاج المزدوجقوية وآمنة مع قبضة مريحةتوفير للوقت والجهد!لا تترك الزجاج متسخًا بعد اليوم! جرّب ماسحة الزجاج المغناطيسية واستمتع بنوافذ لامعة كأنها جديدة. ✨اطلبها الآن!https://icanshope.com/products/mnthf-zjaj-alnoafth-almghnatysy-1للطلب عبر الواتسابHttps://wa.me/+212706380114/Sorry, we're having trouble playing this video.Learn moreICANSHOPE.COMأسهل وأسرع طريقة لتنظيف النوافذ!أزيد من 1500 شخص راض عن هذا المنتجShop now <a href="https://www.facebook.com/ads/library/?id=1067344658412847" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>287</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="138" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://decorwummo.shop/products/miroircr-2025" target="_blank" rel="noopener">Wummo shop</a></td>
+                <td>🔥عرض خاص.. 22 قطعة ديال المرايات العصرية.. كاملين غير فثمن واحد فقطلمسة جمالية تخلي كل الضيوف ينبهروا من ديكور دارك!Sorry, we're having trouble playing this video.Learn moreDECORWUMMO.SHOPاضغط هنـا للـطلب 👉🏻العرض مستمر حتى نهاية الأسبوعOrder now <a href="https://www.facebook.com/ads/library/?id=1046615300912929" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>138</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="158" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://marocainee.youcan.store/pages/khel-hendia" target="_blank" rel="noopener">Cosme-téc</a></td>
+                <td>🌵 خلّ الهندية - الحل الطبيعي لتنظيم السكّر فالدم!كتعاني من السكري؟ بغيتي تخفف من الأعراض وتوازن السكر ديالك بطريقة طبيعية؟خلّ الهندية معروف بفوايدو الكبيرة فتنظيم السكر فالدم وتحسين الصحة العامة.🥗 كيساعد فالهضم وتنقية الجسم💚 طبيعي %100🧪 خالي من المواد الكيميائيةSorry, we're having trouble playing this video.Learn moreMAROCAINEE.YOUCAN.STOREجرب خل الهندية وغيّر حياتك بطريقة صحيةShop now <a href="https://www.facebook.com/ads/library/?id=613694928398104" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>158</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="123" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://api.whatsapp.com/send" target="_blank" rel="noopener">Krimall</a></td>
+                <td>كتعاني من الغبار فالسيارة؟ الفتات فالكوزينة؟ ولا الأوساخ اللي كيتجمعو فالأماكن الضيقة؟📣 جرب المكنسة الكهربائية المحمولة   JB 107 وارتاح من هاد المشاكل كاملة!✅ خفيفة وسهلة فالاستخدام✅ قوة شفط عالية تشفط الغبار، الشعر، والفتات فثواني✅ بطارية قابلة للشحن كتدوم وقت طويل✅ مثالية للسيارة، المكتب، الدار وحتى السفر!💥 متخليش الغبار يعكر عليك الراحة!📦 التوصيل حتى لباب الدار📞 تواصل معنا دابا على الواتساب واطلب نسختك!⚠️ عدد محدود... سارع قبل ما يسالي المخزون!✅https://iwtsp.com/212666765582Sorry, we're having trouble playing this video.Learn moreAPI.WHATSAPP.COMاحصل على خصم 50% عند الشراء الآن✅ التوصيل مجاني طيلة هذا الشهرShop now <a href="https://www.facebook.com/ads/library/?id=753843237201535" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>123</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="161" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://animalmotion.shop/products/catpack1" target="_blank" rel="noopener">Animal Motion</a></td>
+                <td>الحل المثالي للزغب ديال المشاش 🥰🐾❤️129 درهم فقط والتوصيل فااابوورSorry, we're having trouble playing this video.Learn moreANIMALMOTION.SHOPAnimal Motionالتوصيل ب 0 درهمShop now <a href="https://www.facebook.com/ads/library/?id=1128931315665766" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>161</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="188" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://tiravona.com/tiravona/" target="_blank" rel="noopener">Tiravona parfums</a></td>
+                <td>✨ عرض اليوم لا يقاوم! ✨15 عطر عالمي بـ 199 درهم فقط 🌟وكتزيد عليهم 2 أمساك هدية 🎁🚛 التوصيل مجاني حتى لباب دارك⏳ الكمية محدودة، سارع قبل ما يفوتك العرض!💯 جودة ممتازة وتوصيل سريع📲 للطلب والاستفسار:واتساب: https://wa.link/78t217Sorry, we're having trouble playing this video.Learn moreTIRAVONA.COM15 عطر + 2 أمساك هديةالتوصيل مجاني!Order now <a href="https://www.facebook.com/ads/library/?id=598395739190347" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>188</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="982" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://bit.ly/3xQt6Iw" target="_blank" rel="noopener">Amiiin Shop</a></td>
+                <td>تحتاج إلى حامل أكواب متعدد الوضائف لسيارتك؟؟؟  لا تبحث بعيدا.!!💥يعتبر حلا مثاليا للأشخاص الذين يحتاجون إلى تناول المشروبات اثناء السفر بالسيارة🤩 يمكن استخدامه لحمل المشروبات الساخنة والباردة، والهاتف المحمول، المفاتيح العملات 🤑-بفضل قاعدته الصلبة، يمكن وضعه بسهولة على فتحة السيارة واستخدامه أثناء السفر- التوصيل فابور حتى لباب دارك 🛵🛺🚖أطلبه الآن : https://bit.ly/3xQt6Iwأو عبر الواتساب : 0644294346الثمن : 199dh عوض 249dh <a href="https://www.facebook.com/ads/library/?id=3428518424105120" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>982</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="208" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://www.vamox.ma/product-cam-stylo" target="_blank" rel="noopener">Vamox</a></td>
+                <td>كاميرا مراقبة لاسلكية صغيرة 📹 🔥🔥✅ - فيديو: HD✅  وظيفة التسجيل الصوتي✅  وظيفة كاميرا الكمبيوتر✅  مدة الشحن: حوالي 3 ساعات✅  وظيفة ضبط الوقت✅  فتحة Micro SD المتاحة✅  يوجد فتحة Micro SD (تصل إلى 64 جيجابايت)اطلب المنتج الان و غادي تستافد من توصيل بالمجان حتى لباب داركSorry, we're having trouble playing this video.Learn moreWWW.VAMOX.MAكاميرا مراقبة لاسلكية صغيرةالتوصيل بالمجانShop now <a href="https://www.facebook.com/ads/library/?id=1031647241718048" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>208</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="477" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://lilia-maroc.myshopify.com/products/5x1" target="_blank" rel="noopener">Sultani</a></td>
+                <td>🚨 عييتي من صالونات التجميل و جربتي بزاف ديال الاجهزة باش تهلاي فشعرك ولكن تاحاجة ماصدقات 😩🚨 عندنا ليكوم الحل مصفف الشعر 5 ف 1 لي كولشي كايقلب عليه 🔥🚨 مصفف الشعر الحراري 5 ف 1 كيتوفر على خمسة ديال الرؤوس :1️⃣ مجفف الشعر2️⃣ مكثف الشعر3️⃣ 2 رؤوس أسطوانية لي كاتبوكلي الشعر4️⃣ المشط الحراريفعالة و آمنة على فروة الرأسشنو كاتسناي 🤔 دوزي طلب ديالك و ستافدي من هاد العرض الحصري 😍😍الكمية محدودة 🕙Sorry, we're having trouble playing this video.Learn moreLILIA-MAROC.MYSHOPIFY.COMجودة ألمانية عاليةShop now <a href="https://www.facebook.com/ads/library/?id=1469411427278968" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>477</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="446" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://mobilia.ma/" target="_blank" rel="noopener">Mobilia Triangle d'Or</a></td>
+                <td>مرحبًا بكم في موبيليا غاندي 🌷بغيتي تفرش دارك أو معرفش باش تبدا عند موبيليا ديما كاين الحل 👍🏻🦋🦋🦋⚜ Crédit GRATUIT⚜ Livraison EXPRESS⚜ Service décoration GRATUIT📍 Av Dr Med Sijilmassi ex av du phare Bourgogne - Casablanca☎️ Tél : 0661 05 47 64.📍 230, Boulevard Ghandi - Casablanca☎️ Tél : 0661 05 47 66.📍 55, Rue Abou Aala Zahar Quartier 2 Mars - Casablanca☎️ Tél. : 0662 22 63 69.📍 15 Avenue Hassan II Agdal- Rabat☎️ Tél : 0662 05 18 00Sorry, we're having trouble playing this video.Learn moreMOBILIA.MAMobilia Triangle d'OrLivraison Partout au MarocShop now <a href="https://www.facebook.com/ads/library/?id=1880434012448209" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>446</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="330" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://www.globo.ma/product-kawia" target="_blank" rel="noopener">MadiShop</a></td>
+                <td>🔥 مسدس اللحام عالي الأداء 🔧 ✅ تقنية التسخين الخارجية لضمان كفاءة وأداء عالي.✅ نواة تسخين ميكا تضمن التسخين السريع والمتساوي.✅ شامل سلك لحام (1مم/50جم) كهدية مميزة!💡 المثالي للصيانة والإصلاح:لوحات إلكترونيةمكونات كهربائيةوالثمن ماغاديش تلقاه في شي بلاصة أخرى . اطلب المنتج الان و غادي تستافد من توصيل بالمجان حتى لباب داركSorry, we're having trouble playing this video.Learn moreWWW.GLOBO.MAمسدس اللحام عالي الأداءتوصيل بالمجانShop now <a href="https://www.facebook.com/ads/library/?id=1119810672327970" target="_blank" rel="noopener" class="muted">(creative)</a></td>
+                <td>330</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer">© Nashwa Inc. <span class="muted"><a href="https://facebook.com/100095348781890" target="_blank" style="color: var(--accent-2);text-decoration: none;">Facebook</a> • <a href="https://www.instagram.com/nashwa_ai/" target="_blank" style="color: var(--accent-2);text-decoration: none;">Instagram</a></span></p>
+  </main>
+
+  <script>
+    // Tab switching
+    const tabProducts = document.getElementById('tabProducts');
+    const tabAdcopy = document.getElementById('tabAdcopy');
+    const panelProducts = document.getElementById('panelProducts');
+    const panelAdcopy = document.getElementById('panelAdcopy');
+
+    function activateTab(target){
+      const isProducts = target === 'products';
+      tabProducts.setAttribute('aria-selected', isProducts);
+      tabAdcopy.setAttribute('aria-selected', !isProducts);
+      panelProducts.hidden = !isProducts;
+      panelAdcopy.hidden = isProducts ? true : false;
+      localStorage.setItem('ns-active-tab', target);
+      // reset search when switching for clarity
+      document.getElementById('searchInput').value = '';
+      filterRows('');
+    }
+    tabProducts.addEventListener('click', () => activateTab('products'));
+    tabAdcopy.addEventListener('click', () => activateTab('adcopy'));
+    // Restore tab from memory
+    (function(){
+      const saved = localStorage.getItem('ns-active-tab');
+      if(saved === 'adcopy') activateTab('adcopy');
+    })();
+
+    // Searching / filtering
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', (e)=> filterRows(e.target.value.trim().toLowerCase()));
+
+    function filterRows(query){
+      const isProducts = panelAdcopy.hidden; // if adcopy hidden, products is active
+      const tbody = isProducts ? document.getElementById('productsBody') : document.getElementById('adcopyBody');
+      const rows = Array.from(tbody.rows);
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        row.style.display = text.includes(query) ? '' : 'none';
+      });
+    }
+
+    // Sorting
+    const sortButtons = document.querySelectorAll('.btn[data-sort]');
+    const sortState = { key: null, desc: true };
+    sortButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.dataset.sort; // days | occ | cat
+        sortState.desc = sortState.key === key ? !sortState.desc : true; // toggle or default desc
+        sortState.key = key;
+        sortButtons.forEach(b => b.setAttribute('aria-pressed', b === btn ? String(sortState.desc) : 'false'));
+        sortActiveTable();
+      });
+    });
+
+    function sortActiveTable(){
+      const isProducts = panelAdcopy.hidden;
+      const tbody = isProducts ? document.getElementById('productsBody') : document.getElementById('adcopyBody');
+      const rows = Array.from(tbody.rows);
+      const { key, desc } = sortState;
+      if(!key){ return; }
+      const getVal = (row) => {
+        if(key === 'cat') return (row.dataset.cat || '').toString();
+        if(isProducts){
+          if(key === 'days') return parseInt(row.dataset.maxDays || row.dataset.minDays || '0', 10);
+          if(key === 'occ') return parseInt(row.dataset.occ || '0', 10);
+        } else {
+          if(key === 'days') return parseInt(row.dataset.days || '0', 10);
+          if(key === 'occ') return parseInt(row.dataset.occ || '0', 10);
+        }
+        return 0;
+      };
+      rows.sort((a,b)=>{
+        const A = getVal(a); const B = getVal(b);
+        if(typeof A === 'string' || typeof B === 'string'){
+          return desc ? String(B).localeCompare(String(A)) : String(A).localeCompare(String(B));
+        }
+        return desc ? (B - A) : (A - B);
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    }
+
+    function sanitize(text){
+      const t = text.replace(/\s+/g,' ').trim();
+      if(/[",\n]/.test(t)) return '"' + t.replace(/"/g,'""') + '"';
+      return t;
+    }
+    function toggleShopTable(header) {
+  const container = header.nextElementSibling;
+  const arrow = header.querySelector(".arrow");
+
+  container.classList.toggle("open");
+  arrow.classList.toggle("open");
+}
+  </script>
+</body>
+</html>
