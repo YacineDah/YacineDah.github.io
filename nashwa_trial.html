@@ -148,6 +148,48 @@
 
     .footer{padding:30px 0 60px; color:#94a3b8; font-size:14px; text-align:center}
 
+    /* Filters */
+    .filters{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-group{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .filter-group label{
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+      font-weight: 600;
+    }
+    .filter-group input,
+    .filter-group select{
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #fff;
+      box-shadow: var(--shadow);
+      font: inherit;
+      outline: none;
+      transition: box-shadow 0.15s ease;
+    }
+    .filter-group input:focus,
+    .filter-group select:focus{
+      box-shadow: 0 0 0 3px rgba(99,102,241,.1), var(--shadow);
+      border-color: var(--accent-1);
+    }
+    .filter-group input{
+      width: 80px;
+    }
+    .filter-group select{
+      min-width: 150px;
+      cursor: pointer;
+    }
+
     /* Responsive */
     @media (max-width: 920px){
       .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -156,6 +198,10 @@
       .nav{flex-direction:column; align-items:flex-start}
       .controls{flex-direction:column; align-items:stretch}
       .card-header{flex-direction:column; align-items:flex-start; gap:8px}
+      .filters{flex-direction:column; align-items:stretch}
+      .filter-group{flex-direction:column; align-items:flex-start; width:100%}
+      .filter-group input,
+      .filter-group select{width:100%}
     }
     /* Dropdown effect for shop table */
 .table-container {
@@ -205,19 +251,19 @@
         <section class="stats" aria-label="Summary statistics">
           <div class="stat" role="status">
             <div class="label">الإعلانات</div>
-            <div class="value">4</div>
+            <div class="value">20</div>
           </div>
           <div class="stat" role="status">
             <div class="label">المنتجات</div>
-            <div class="value">3</div>
+            <div class="value">12</div>
           </div>
           <div class="stat" role="status">
             <div class="label">المتاجر</div>
-            <div class="value">3</div>
+            <div class="value">11</div>
           </div>
           <div class="stat" role="status">
             <div class="label">التصنيفات</div>
-            <div class="value">1</div>
+            <div class="value">2</div>
           </div>
         </section>
       </div>
@@ -253,17 +299,57 @@
         <tbody>
           
             <tr>
-              <td style="font-weight:600">Ali Shop</td>
+              <td style="font-weight:600">Timberline</td>
+              <td class="col-center">7</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Car Accessories Stoore</td>
+              <td class="col-center">3</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Daily Needs </td>
               <td class="col-center">2</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Chaouia pur et sur</td>
+              <td style="font-weight:600">Chic shop</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">American dream</td>
+              <td style="font-weight:600">Ali Shop</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Ellouyzy shop</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Autoartix</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Selena shop</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">DHiramama Store</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Bâche Auto Maghreb</td>
+              <td class="col-center">1</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Espace Tayeb</td>
               <td class="col-center">1</td>
             </tr>
           
@@ -284,6 +370,23 @@
         <div class="search" role="search" style="display: flex;max-height: min-content;">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/></svg>
           <input id="searchInput" type="search" placeholder="ابحث عن المنتجات , المتاجر , التصنيفات ..." aria-label="Search table" />
+        </div>
+
+        <div class="filters">
+          <div class="filter-group">
+            <label for="daysMin">من:</label>
+            <input id="daysMin" type="number" min="0" placeholder="أقل أيام" />
+          </div>
+          <div class="filter-group">
+            <label for="daysMax">إلى:</label>
+            <input id="daysMax" type="number" min="0" placeholder="أقصى أيام" />
+          </div>
+          <div class="filter-group">
+            <label for="categoryFilter">التصنيف:</label>
+            <select id="categoryFilter">
+              <option value="">جميع التصنيفات</option>
+            </select>
+          </div>
         </div>
 
         <div class="segmented" aria-label="Sort options" style="display: flow;">
@@ -322,70 +425,281 @@
             </thead>
             <tbody id="productsBody">
               
-              <tr data-max-days="243" data-min-days="243" data-occ="1" data-cat="مطبخ">
-                <td style="font-weight:600">قطاعة خضار</td>
+              <tr data-max-days="365" data-min-days="365" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">شريط عازل</td>
                 <td>
                   <ul class="shops">
                     
                       <li>
-                        <a href="https://abitostyle.store/products/mandoline-v5" target="_blank" rel="noopener">American dream</a>
-                        <span class="muted">(243 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=2622667317922983" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://privilegia.click/lp1/bande-d%C3%A9tanch%C3%A9it%C3%A9-en-caoutchouc-pour-voiture/fcb/1370748260526308" target="_blank" rel="noopener">Car Accessories Stoore</a>
+                        <span class="muted">(365 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=2372048139804743" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                   </ul>
                 </td>
                 <td>
                   
-                    <div class="badge"><span class="badge-dot"></span>243</div>
+                    <div class="badge"><span class="badge-dot"></span>365</div>
                   
                 </td>
                 <td style="font-weight:700">1</td>
-                <td><span class="badge" title="Category">مطبخ</span></td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
               </tr>
               
-              <tr data-max-days="135" data-min-days="135" data-occ="1" data-cat="مطبخ">
-                <td style="font-weight:600">حبوب بلدية</td>
+              <tr data-max-days="356" data-min-days="178" data-occ="7" data-cat="أدوات سيارة">
+                <td style="font-weight:600">أغطية مقاعد</td>
                 <td>
                   <ul class="shops">
                     
                       <li>
-                        <a href="https://chaouiapuretsur.ma/collections/farines?page=1" target="_blank" rel="noopener">Chaouia pur et sur</a>
-                        <span class="muted">(135 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1782911152657269" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://cover.timberline.ma/dragon" target="_blank" rel="noopener">Timberline</a>
+                        <span class="muted">(178 يوم • 5 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=618830550556372" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://privilegia.click/lp1/coussins-de-si%C3%A8ge/fcb/1370748260526308" target="_blank" rel="noopener">Car Accessories Stoore</a>
+                        <span class="muted">(356 يوم • 2 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=483160094312682" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                   </ul>
                 </td>
                 <td>
                   
-                    <div class="badge"><span class="badge-dot"></span>135</div>
+                    <div class="badge" title="Min–Max days running">
+                      <span class="badge-dot" style="background:var(--accent-1)"></span>
+                      أقل 178
+                    </div>
+                    <div class="badge" style="margin-left:8px;" title="Max days running">
+                      <span class="badge-dot"></span>
+                      أقصى 356
+                    </div>
+                  
+                </td>
+                <td style="font-weight:700">7</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="354" data-min-days="354" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">مضخة هواء</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://ellouyzy.shop/products/mdkh-hoa-khrbaey-mhmol-laslky-msbah-ydoy-obnk-tak-1" target="_blank" rel="noopener">Ellouyzy shop</a>
+                        <span class="muted">(354 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=2612957979093894" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>354</div>
                   
                 </td>
                 <td style="font-weight:700">1</td>
-                <td><span class="badge" title="Category">مطبخ</span></td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
               </tr>
               
-              <tr data-max-days="104" data-min-days="104" data-occ="2" data-cat="مطبخ">
-                <td style="font-weight:600">قطّاعة خضار</td>
+              <tr data-max-days="270" data-min-days="270" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">منظم مقعد</td>
                 <td>
                   <ul class="shops">
                     
                       <li>
-                        <a href="https://www.casashop.pro/kat12" target="_blank" rel="noopener">Ali Shop</a>
-                        <span class="muted">(104 يوم • 2 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1101288098630431" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://priivado.myshopify.com/products/caras" target="_blank" rel="noopener">DHiramama Store</a>
+                        <span class="muted">(270 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1346095606519036" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                   </ul>
                 </td>
                 <td>
                   
-                    <div class="badge"><span class="badge-dot"></span>104</div>
+                    <div class="badge"><span class="badge-dot"></span>270</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="177" data-min-days="177" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">منظم سيارة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://privilegia.click/lp1/multifunctional-car-organizer/fcb/1370748260526308" target="_blank" rel="noopener">Chic shop</a>
+                        <span class="muted">(177 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=748198997883646" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>177</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="140" data-min-days="140" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">غطاء سيارة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://bacheauto.store/pages/carcoverbam" target="_blank" rel="noopener">Bâche Auto Maghreb</a>
+                        <span class="muted">(140 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1935199297216066" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>140</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="137" data-min-days="137" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">إصلاح زجاج</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://www.casashop.pro/sgjh" target="_blank" rel="noopener">Ali Shop</a>
+                        <span class="muted">(137 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=23891876033844991" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>137</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="133" data-min-days="133" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">ملصقات عتبة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://fb.com/messenger_doc/" target="_blank" rel="noopener">Selena shop</a>
+                        <span class="muted">(133 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1271658198304091" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>133</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="128" data-min-days="128" data-occ="2" data-cat="أدوات سيارة">
+                <td style="font-weight:600">مقبض غيار</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://dyali.net/products/%D9%85%D9%82%D8%A8%D8%B6-%D8%AA%D8%A8%D8%AF%D9%8A%D9%84-%D8%B3%D8%B1%D8%B9%D8%A7%D8%AA-%D9%85%D8%B6%D9%8A%D8%A6-%D8%A8%D8%A7%D9%84%D9%84%D9%85%D8%B3" target="_blank" rel="noopener">Daily Needs </a>
+                        <span class="muted">(128 يوم • 2 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1257957829144177" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>128</div>
                   
                 </td>
                 <td style="font-weight:700">2</td>
-                <td><span class="badge" title="Category">مطبخ</span></td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="120" data-min-days="120" data-occ="1" data-cat="أدوات سيارة">
+                <td style="font-weight:600">مادة محرك</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://garagesmartauto.it.com/eLOJvCvrw" target="_blank" rel="noopener">Autoartix</a>
+                        <span class="muted">(120 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1101251035292548" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>120</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="120" data-min-days="120" data-occ="1" data-cat="أدوات">
+                <td style="font-weight:600">مكنسة كهربائية</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://bonqualite.com/aspirateur-inox/" target="_blank" rel="noopener">Espace Tayeb</a>
+                        <span class="muted">(120 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=716546568214604" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>120</div>
+                  
+                </td>
+                <td style="font-weight:700">1</td>
+                <td><span class="badge" title="Category">أدوات</span></td>
+              </tr>
+              
+              <tr data-max-days="109" data-min-days="109" data-occ="2" data-cat="أدوات سيارة">
+                <td style="font-weight:600">غطاء مقود</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://cover.timberline.ma/couvre-volent-dragon-series" target="_blank" rel="noopener">Timberline</a>
+                        <span class="muted">(109 يوم • 2 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=2177816872722950" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge"><span class="badge-dot"></span>109</div>
+                  
+                </td>
+                <td style="font-weight:700">2</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
               </tr>
               
             </tbody>
@@ -409,24 +723,109 @@
             </thead>
             <tbody id="adcopyBody">
               
-              <tr data-days="104" data-occ="2" data-cat="">
-                <td style="font-weight:600"><a href="https://www.casashop.pro/kat12" target="_blank" rel="noopener">Ali Shop</a></td>
-                <td>لم يعد تقطيع الخضار مهمة متعبة!قطّاعة كهربائية صغيرة وسريعة تعمل بلمسة واحدة،لتوفّر عليك الوقت والجهد في مطبخك.للطلب عبر الموقع: https://www.casashop.pro/kat12للطلب عبر الواتساب: https://wa.me/212609969544Sorry, we're having trouble playing this video.Learn moreCASASHOP.PROقطّاعة سريعةاضغط هنا للطلبShop now <a href="https://www.facebook.com/ads/library/?id=1101288098630431" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
-                <td>104</td>
+              <tr data-days="178" data-occ="5" data-cat="">
+                <td style="font-weight:600"><a href="https://cover.timberline.ma/dragon" target="_blank" rel="noopener">Timberline</a></td>
+                <td>كوموندي في الموقع الالكتروني 👌أضف لمسة فاخرة لمقاعد سيارتك مع Dragon Series من Timberline. 💺✨✔ تصميم مريح وجذاب✔ ألوان تناسب كل الأذواق✔ حماية تدوم طويلاًSorry, we're having trouble playing this video.Learn moreTIMBERLINE.MAكوموندي في الموقع الالكتروني 👌4.9/5 ⭐️⭐️⭐️⭐️⭐️Shop now <a href="https://www.facebook.com/ads/library/?id=618830550556372" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>178</td>
+                <td style="font-weight:700">5</td>
+              </tr>
+              
+              <tr data-days="128" data-occ="2" data-cat="">
+                <td style="font-weight:600"><a href="https://dyali.net/products/%D9%85%D9%82%D8%A8%D8%B6-%D8%AA%D8%A8%D8%AF%D9%8A%D9%84-%D8%B3%D8%B1%D8%B9%D8%A7%D8%AA-%D9%85%D8%B6%D9%8A%D8%A1-%D8%A8%D8%A7%D9%84%D9%84%D9%85%D8%B3" target="_blank" rel="noopener">Daily Needs </a></td>
+                <td>💎حوّل سيارتك لتحفة مضيئة!💎🚗 يناسب يدوي وأوتوماتيك🌈 إضاءة مبهرة بـ7 ألوان🔧 تركيب في دقائق بدون أدوات✨ لمسة فخامة ماشي عند الجميع – اطلبه الآن وخلي كل نقلة مميزة! ✨Sorry, we're having trouble playing this video.Learn moreDYALI.NET🔧 مقبض فاخر بتركيب سهلShop now <a href="https://www.facebook.com/ads/library/?id=1257957829144177" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>128</td>
                 <td style="font-weight:700">2</td>
               </tr>
               
-              <tr data-days="135" data-occ="1" data-cat="">
-                <td style="font-weight:600"><a href="https://chaouiapuretsur.ma/collections/farines?page=1" target="_blank" rel="noopener">Chaouia pur et sur</a></td>
-                <td>كاملين توحشنا الماكلة ديال زمان الوقت اللي كان كلشي صحي و طبيعي 100%  ✨😋أجود الحبوب المحلية بلدية مغسولة و منقية مزيان قبل ما تطحن أعشاب صحية و خيارات متعددة أكثر من 24 منتج مجموعة الشاوية البلدية غداء امن و صحي نحن مصدره 👨‍🌾✅الشعير البلدي 🌾✅القمح الكامل البلدي✅ فرينة بلدية البديل الأنسب للفورص ✅ ذرة ايلان حمرة كسكس…الخ 🌽تجربتنا موثقة و يمكنك إلقاء نظرة عن كثب 👀الشاوية بحثك الأخير و مصدرك النهائي لوجبات صحية ووداعا للقلق بشأن جودة الحبوب 🤝تذوقها الأن و نعدك لن تفارق مطبخك ✨🥰Sorry, we're having trouble playing this video.Learn moreCHAOUIAPURETSUR.MAرفيقك الأمثل لوجبات صحية  🥰Shop now <a href="https://www.facebook.com/ads/library/?id=1782911152657269" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
-                <td>135</td>
+              <tr data-days="109" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://cover.timberline.ma/couvre-volent-dragon-series" target="_blank" rel="noopener">Timberline</a></td>
+                <td>🚗 غطاء مقود السيارة Timberline Dragon Series 🔥تمتع براحة استثنائية وحماية كاملة لمقود سيارتك مع Timberline Dragon Series!✔ تصميم عصري وفاخر يزيد من جمال سيارتك 😍✔ جلد مثقب مقاوم للعرق يحافظ على يديك جافة في كل الأوقات 💧✔ حماية ممتازة ضد الخدوش والحرارة العالية 🔥✔ تركيب سهل مع خيط وإبرة لثبات رائع 🧵✔ يتناسب مع معظم أنواع السيارات 🚘كوموندي في الموقع الالكتروني 👌Sorry, we're having trouble playing this video.Learn moreWWW.TIMBERLINE.MAكوموندي في الموقع الالكتروني 👌4.9/5 ⭐️⭐️⭐️⭐️⭐️Shop now <a href="https://www.facebook.com/ads/library/?id=2177816872722950" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>109</td>
                 <td style="font-weight:700">1</td>
               </tr>
               
-              <tr data-days="243" data-occ="1" data-cat="">
-                <td style="font-weight:600"><a href="https://abitostyle.store/products/mandoline-v5" target="_blank" rel="noopener">American dream</a></td>
-                <td>🎯 وفر وقتك... وقطّع بدقة!🥕🍅🥒مع أداة التقطيع الذكية، اجعل تحضير الخضار أسرع وأسهل من أي وقت مضى!✅ تقطيع مثالي ودقيق للخيار، الطماطم، الجزر، الكرنب والمزيد✅ آمنة وسهلة الاستخدام مع واقٍ لحماية اليدين✅ تصميم مريح وقابل للطي لتوفير المساحة✅ مثالية للسلطات، الشوربات، والمقبلات💡 سواء كنت طاهٍ محترف أو تطبخ في البيت، هذه الأداة ستُحدث فرقاً كبيراً في مطبخك!🛒 اطلبها الآن وتمتع براحة وسرعة في تحضير وجباتك اليومية!Sorry, we're having trouble playing this video.Learn moreABITOSTYLE.STOREقطاعة خضار V5 الألمانيةShop now <a href="https://www.facebook.com/ads/library/?id=2622667317922983" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
-                <td>243</td>
+              <tr data-days="365" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://privilegia.click/lp1/bande-d%C3%A9tanch%C3%A9it%C3%A9-en-caoutchouc-pour-voiture/fcb/1370748260526308" target="_blank" rel="noopener">Car Accessories Stoore</a></td>
+                <td>🚗 شريط عازل مطاطي: الحل المثالي لعزل سيارتك🔹 عزل ممتاز: يحمي سيارتك من تسرب الهواء والماء.🔹 مرن وسهل التركيب: لا يحتاج إلى أي أدوات معقدة.🔹 متين وطويل الأمد: مصنوع من مواد عالية الجودة.للطلب عبر الموقع:👇👇👇https://bit.ly/4dYppmKو للاستفسار عبر رابط الواتساب👇👇👇https://wa.me/message/7JQFI6PX46KJL1 <a href="https://www.facebook.com/ads/library/?id=2372048139804743" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>365</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="177" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://privilegia.click/lp1/multifunctional-car-organizer/fcb/1370748260526308" target="_blank" rel="noopener">Chic shop</a></td>
+                <td>كتسوق بزاف؟ أو كتخلي أغراضك دايماً ضايعة وسط السيارة؟Acoudoir المنظم الذكي هو الحل لي غيبدّل تجربتك فالسياقة كلياً!✔️ مسند يد مريح يحميك من التعب✔️ منظم عملي للتخزين: هاتف، مفاتيح، نقود، أوراق...✔️ حامل أكواب مزدوج✔️ منفذ USB للشحن السريع✔️ تصميم فاخر يتماشى مع جميع أنواع السياراتمن اليوم، كلشي منظم، سهل توصل ليه، وفي متناول يدك 👌⏳ العرض محدود… سارع قبل مايسالي!Sorry, we're having trouble playing this video.Learn morePRIVILEGIA.CLICKحول سيارتك لمكتب صغير ومنظم بلمسة أنيقة وذكية!مسند يد متعدد المهام… راحة، ترتيب، وشحن في مكان واحد!Shop now <a href="https://www.facebook.com/ads/library/?id=748198997883646" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>177</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="137" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://www.casashop.pro/sgjh" target="_blank" rel="noopener">Ali Shop</a></td>
+                <td>كتشوف الشقوق فـ الزجاج كيكبرو يوم على يوم؟راك ما محتاج لا كراج لا مصاريف زايدة…الحل بين يديك وبأقل من 10 دقايق!للطلب عبر الموقع:https://www.casashop.pro/sgjhللطلب عبر الواتساب: https://wa.me/212609969544Sorry, we're having trouble playing this video.Learn moreWWW.CASASHOP.PROإصلاح الزجاجخود ديالكShop now <a href="https://www.facebook.com/ads/library/?id=23891876033844991" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>137</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="354" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://ellouyzy.shop/products/mdkh-hoa-khrbaey-mhmol-laslky-msbah-ydoy-obnk-tak-1" target="_blank" rel="noopener">Ellouyzy shop</a></td>
+                <td>نفخ سريع وسهل - إطارات سيارتك ودراجتك النارية ودراجتك - مع ضغط قابل للتعديل ومصباح يدوي مدمج ووضع SOS🚛التوصيل بالمجان والدفع عند الاستلام👈 للطلب عبرالواتساب 0603990749Sorry, we're having trouble playing this video.Learn moreELLOUYZY.SHOPEllouyzy shopمضخة هواء كهربائية لاسلكية: وداعًا للأسلاك، مرحبًا بالراحة!
+مضخة هواء كهربائية محمولة - رفيق سفر مثالي يجمع بين الراحة والوظائف المتعددة. استمتع برحلات آمنة ومريحة مع مضخة الهواء الكهربائية المحمولة بدون أسلاك!Order now <a href="https://www.facebook.com/ads/library/?id=2612957979093894" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>354</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="120" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://garagesmartauto.it.com/eLOJvCvrw" target="_blank" rel="noopener">Autoartix</a></td>
+                <td>الزيت كينقص بسرعة؟ الحل عندنا! هاد المنتج كينقص الاستهلاك ويحمي المحرك!Sorry, we're having trouble playing this video.Learn moreGARAGESMARTAUTO.IT.COMاطلب الأن الكمية محدودةantifumageShop now <a href="https://www.facebook.com/ads/library/?id=1101251035292548" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>120</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="356" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://privilegia.click/lp1/coussins-de-si%C3%A8ge/fcb/1370748260526308" target="_blank" rel="noopener">Car Accessories Stoore</a></td>
+                <td>حوّل مظهر سيارتك وامنع البقع والتلف مع أغطية مقعد السيارة عالية الجودة✅ حماية فعّالة للمقاعد من التآكل والبقع.🌟 تصاميم عصرية تناسب مختلف الأذواق وتضفي لمسة مميزة.💧 سهلة التركيب والتنظيف، لتبقى سيارتك في أفضل حالاتها دائمًا.للطلب عبر الموقع:👇👇👇https://bit.ly/3A40QHgو للاستفسار عبر رابط الواتساب👇👇👇https://wa.me/message/7JQFI6PX46KJL1Sorry, we're having trouble playing this video.Learn morePRIVILEGIA.CLICKأغطية مقعد السيارة – راحة وحماية بأناقة جديدة🚗✨🚚 التوصيل مجاني و رضا الزبناء مضمونShop now <a href="https://www.facebook.com/ads/library/?id=483160094312682" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>356</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="356" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://privilegia.click/lp1/coussins-de-si%C3%A8ge/fcb/1370748260526308" target="_blank" rel="noopener">Car Accessories Stoore</a></td>
+                <td>اجعل سيارتك تبدو جديدة دائماً! اطلب الآن واحصل على حماية وأناقة لمقاعدك.🧵 جودة عالية وتصميمات جذابة تناسب جميع السيارات.💧 سهلة التركيب والتنظيف، لتبقى سيارتك في أفضل حالاتها دائمًا.للطلب عبر الموقع:👇👇👇https://bit.ly/3A40QHgو للاستفسار عبر رابط الواتساب👇👇👇https://wa.me/message/7JQFI6PX46KJL1Sorry, we're having trouble playing this video.Learn morePRIVILEGIA.CLICKأغطية مقعد السيارة – راحة وأناقة تحمي مقاعدك💺✨🚚 التوصيل مجاني و رضا الزبناء مضمونShop now <a href="https://www.facebook.com/ads/library/?id=1034556401692405" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>356</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="169" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://cover.timberline.ma/couvre-volent-dragon-series" target="_blank" rel="noopener">Timberline</a></td>
+                <td>🚗 غطاء مقود السيارة Timberline Dragon Series 🔥تمتع براحة استثنائية وحماية كاملة لمقود سيارتك مع Timberline Dragon Series!✔ تصميم عصري وفاخر يزيد من جمال سيارتك 😍✔ جلد مثقب مقاوم للعرق يحافظ على يديك جافة في كل الأوقات 💧✔ حماية ممتازة ضد الخدوش والحرارة العالية 🔥✔ تركيب سهل مع خيط وإبرة لثبات رائع 🧵✔ يتناسب مع معظم أنواع السيارات 🚘كوموندي في الموقع الالكتروني 👌Sorry, we're having trouble playing this video.Learn moreCOVER.TIMBERLINE.MAكوموندي في الموقع الالكتروني 👌4.9/5 ⭐️⭐️⭐️⭐️⭐️Shop now <a href="https://www.facebook.com/ads/library/?id=627062719667870" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>169</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="133" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://fb.com/messenger_doc/" target="_blank" rel="noopener">Selena shop</a></td>
+                <td>✨ احمِ سيارتك بلمسة من الأناقة!ملصقات عتبة باب السيارة المصنوعة من فينيل عالي الجودة بتصميم يحاكي ألياف الكربون تضيف لمسة رياضية وعصرية لسيارتك.✔️ تحمي العتبات من الخدوش والتآكل✔️ سهلة التركيب وملائمة لجميع ماركات السيارات✔️ مقاومة للماء والغبارSorry, we're having trouble playing this video.Learn moreFB.COMاضغض هنا للطلب✨🤍Shop now <a href="https://www.facebook.com/ads/library/?id=1271658198304091" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>133</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="270" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://priivado.myshopify.com/products/caras" target="_blank" rel="noopener">DHiramama Store</a></td>
+                <td>✅ وداعًا للفوضى مع منظّم تخزين مقاعد السيارة✅ إشتري 1 و احصل على الثاني مجانا✅ حافظ على تنظيم سيارتك مع التصميم الأنيق والمريح.Sorry, we're having trouble playing this video.Learn morePRIIVADO.MYSHOPIFY.COM✅إشتري 1 و احصل على الثاني مجانا✅Shop now <a href="https://www.facebook.com/ads/library/?id=1346095606519036" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>270</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="140" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://bacheauto.store/pages/carcoverbam" target="_blank" rel="noopener">Bâche Auto Maghreb</a></td>
+                <td>🛑 احمِ سيارتك مع غطاء السيارة رقم واحد بالمغرب! 🛑الثمن 219 درهم + التوصيل مجاني.✅ 4 أحزمة تثبيت على العجلات لضمان ثباته في الرياح القوية.✅ مقاوم للماء، الأمطار، الشمس، والغبار للحفاظ على سيارتك نظيفة دائمًا.✅ مقاسات مختلفة ليناسب جميع السيارات.🚗 اطلبه الآن واستمتع بحماية كاملة! 🔒✨📌 عبر الموقع:https://bacheauto.store/pages/carcoverbamBACHEAUTO.STORE🚗🛡️ احمِ سيارتك  بأفضل ثمن فقط 219 درهم  🛡️🚗اطلب الآن واستفد بعرض خاص -40% لفترة محدودة! 📩💨Order now <a href="https://www.facebook.com/ads/library/?id=1935199297216066" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>140</td>
+                <td style="font-weight:700">1</td>
+              </tr>
+              
+              <tr data-days="120" data-occ="1" data-cat="">
+                <td style="font-weight:600"><a href="https://bonqualite.com/aspirateur-inox/" target="_blank" rel="noopener">Espace Tayeb</a></td>
+                <td>اسبيراتور من نوع مختلف بثن جد رائع ✅غادي تهنى وتغسل دارك و سيارتك و مكتب ديالك بكل سهولة 🌟للطلب : 0699464280Sorry, we're having trouble playing this video.Learn moreBONQUALITE.COMاسبيراتور من نوع مختلف بثن جد رائع ✅Shop now <a href="https://www.facebook.com/ads/library/?id=716546568214604" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>120</td>
                 <td style="font-weight:700">1</td>
               </tr>
               
@@ -452,9 +851,15 @@
       panelProducts.hidden = !isProducts;
       panelAdcopy.hidden = isProducts ? true : false;
       localStorage.setItem('ns-active-tab', target);
-      // reset search when switching for clarity
+      // reset filters when switching for clarity
       document.getElementById('searchInput').value = '';
-      filterRows('');
+      document.getElementById('daysMin').value = '';
+      document.getElementById('daysMax').value = '';
+      document.getElementById('categoryFilter').value = '';
+      setTimeout(() => {
+        populateCategories();
+        applyFilters();
+      }, 100);
     }
     tabProducts.addEventListener('click', () => activateTab('products'));
     tabAdcopy.addEventListener('click', () => activateTab('adcopy'));
@@ -464,18 +869,85 @@
       if(saved === 'adcopy') activateTab('adcopy');
     })();
 
+    // Populate category filter dropdown
+    function populateCategories(){
+      const categorySelect = document.getElementById('categoryFilter');
+      const isProducts = panelAdcopy.hidden;
+      const tbody = isProducts ? document.getElementById('productsBody') : document.getElementById('adcopyBody');
+      const rows = Array.from(tbody.rows);
+      const categories = new Set();
+      
+      rows.forEach(row => {
+        const cat = (row.dataset.cat || '').trim();
+        if(cat) categories.add(cat);
+      });
+      
+      // Clear existing options except "All"
+      categorySelect.innerHTML = '<option value="">جميع التصنيفات</option>';
+      
+      // Add categories sorted
+      Array.from(categories).sort().forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        categorySelect.appendChild(option);
+      });
+    }
+    
+    // Initialize categories on load
+    populateCategories();
+
     // Searching / filtering
     const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', (e)=> filterRows(e.target.value.trim().toLowerCase()));
+    const daysMinInput = document.getElementById('daysMin');
+    const daysMaxInput = document.getElementById('daysMax');
+    const categoryFilter = document.getElementById('categoryFilter');
+    
+    searchInput.addEventListener('input', () => applyFilters());
+    daysMinInput.addEventListener('input', () => applyFilters());
+    daysMaxInput.addEventListener('input', () => applyFilters());
+    categoryFilter.addEventListener('change', () => applyFilters());
 
-    function filterRows(query){
+    function applyFilters(){
+      const query = searchInput.value.trim().toLowerCase();
+      const daysMin = parseInt(daysMinInput.value) || 0;
+      const daysMax = parseInt(daysMaxInput.value) || Infinity;
+      const selectedCategory = categoryFilter.value.toLowerCase();
+      
       const isProducts = panelAdcopy.hidden; // if adcopy hidden, products is active
       const tbody = isProducts ? document.getElementById('productsBody') : document.getElementById('adcopyBody');
       const rows = Array.from(tbody.rows);
+      
       rows.forEach(row => {
+        // Search filter
         const text = row.innerText.toLowerCase();
-        row.style.display = text.includes(query) ? '' : 'none';
+        const matchesSearch = !query || text.includes(query);
+        
+        // Days range filter
+        let matchesDays = true;
+        if(isProducts){
+          const maxDays = parseInt(row.dataset.maxDays || row.dataset.minDays || '0', 10);
+          const minDays = parseInt(row.dataset.minDays || '0', 10);
+          // Show if any part of the range overlaps with filter range
+          matchesDays = (minDays <= daysMax && maxDays >= daysMin);
+        } else {
+          const days = parseInt(row.dataset.days || '0', 10);
+          matchesDays = (days >= daysMin && days <= daysMax);
+        }
+        
+        // Category filter
+        const rowCategory = (row.dataset.cat || '').toLowerCase();
+        const matchesCategory = !selectedCategory || rowCategory === selectedCategory;
+        
+        // Show row only if all filters match
+        row.style.display = (matchesSearch && matchesDays && matchesCategory) ? '' : 'none';
       });
+    }
+
+    function filterRows(query){
+      // Legacy function for compatibility, now uses applyFilters
+      searchInput.value = query;
+      applyFilters();
     }
 
     // Sorting
