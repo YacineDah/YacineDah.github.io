@@ -230,6 +230,104 @@
 .arrow.open {
   transform: rotate(90deg);
 }
+/* Mobile responsive styles for productsTable */
+@media (max-width: 640px) {
+    /* Make table-wrap contain overflow properly */
+    .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    max-width: 100%;
+    }
+    
+    /* Ensure table fits within container */
+    #productsTable {
+    font-size: 11px;
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+    }
+    
+    #productsTable thead th {
+    font-size: 6px;
+    padding: 8px 4px;
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.3;
+    }
+    
+    #productsTable tbody td {
+    padding: 8px 4px;
+    font-size: 10px;
+    word-break: break-word;
+    line-height: 1.4;
+    }
+    
+    /* Set specific column widths to fit mobile */
+    #productsTable th:nth-child(1),
+    #productsTable td:nth-child(1) {
+    width: 20%;
+    min-width: 60px;
+    }
+    
+    #productsTable th:nth-child(2),
+    #productsTable td:nth-child(2) {
+    width: 35%;
+    min-width: 100px;
+    }
+    
+    #productsTable th:nth-child(3),
+    #productsTable td:nth-child(3) {
+    width: 15%;
+    min-width: 50px;
+    }
+    
+    #productsTable th:nth-child(4),
+    #productsTable td:nth-child(4) {
+    width: 12%;
+    min-width: 40px;
+    }
+    
+    #productsTable th:nth-child(5),
+    #productsTable td:nth-child(5) {
+    width: 18%;
+    min-width: 50px;
+    }
+    
+    /* Make badges smaller */
+    #productsTable .badge {
+    font-size: 9px;
+    padding: 2px 6px;
+    white-space: nowrap;
+    }
+    
+    /* Make shop lists more compact */
+    #productsTable .shops {
+    font-size: 9px;
+    gap: 3px;
+    }
+    
+    #productsTable .shops li {
+    font-size: 9px;
+    line-height: 1.3;
+    }
+    
+    #productsTable .shops a {
+    font-size: 9px;
+    word-break: break-all;
+    }
+    
+    #productsTable .muted {
+    font-size: 8px;
+    white-space: nowrap;
+    }
+    
+    /* Ensure product names wrap */
+    #productsTable td:nth-child(1) {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    }
+}
   </style>
 </head>
 <body>
@@ -251,7 +349,7 @@
         <section class="stats" aria-label="Summary statistics">
           <div class="stat" role="status">
             <div class="label">الإعلانات</div>
-            <div class="value">75</div>
+            <div class="value">47</div>
           </div>
           <div class="stat" role="status">
             <div class="label">المنتجات</div>
@@ -259,7 +357,7 @@
           </div>
           <div class="stat" role="status">
             <div class="label">المتاجر</div>
-            <div class="value">33</div>
+            <div class="value">25</div>
           </div>
           <div class="stat" role="status">
             <div class="label">التصنيفات</div>
@@ -299,167 +397,127 @@
         <tbody>
           
             <tr>
-              <td style="font-weight:600">Riva shop  🇩🇿</td>
-              <td class="col-center">15</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">MobilArt.ma - Meubles et décoration 🇲🇦</td>
+              <td style="font-weight:600">Asrar Deco LB 🇱🇾</td>
               <td class="col-center">8</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">شركة صالونات الإخوة مقصود 🇩🇿</td>
-              <td class="col-center">5</td>
+              <td style="font-weight:600">Cakado TN 🇹🇳</td>
+              <td class="col-center">6</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Finea 🇩🇿</td>
-              <td class="col-center">5</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">Marina Deco 🇩🇿</td>
-              <td class="col-center">4</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">Beeco Shop DZ 🇩🇿</td>
-              <td class="col-center">4</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">PerfEx 🇹🇳</td>
+              <td style="font-weight:600">Hi store 🇲🇦</td>
               <td class="col-center">3</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Midou shop  🇩🇿</td>
+              <td style="font-weight:600">Coverline 🇲🇦</td>
               <td class="col-center">3</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Galaxy home 🇲🇦</td>
+              <td style="font-weight:600">jibliaashop 🇲🇦</td>
+              <td class="col-center">3</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">ماركت ليبيا للتسوق 🇱🇾</td>
               <td class="col-center">2</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Artéva 🇩🇿</td>
+              <td style="font-weight:600">Luxe car  🇩🇿</td>
               <td class="col-center">2</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Big Décoration + 🇩🇿</td>
+              <td style="font-weight:600">Bâche Auto Maghreb 🇲🇦</td>
               <td class="col-center">2</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Shopping on click 🇩🇿</td>
+              <td style="font-weight:600">Décora Star DZ 🇩🇿</td>
+              <td class="col-center">2</td>
+            </tr>
+          
+            <tr>
+              <td style="font-weight:600">Mycatsy 🇲🇦</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">iMix shop  🇩🇿</td>
+              <td style="font-weight:600">City market 🇲🇦</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Beauté shop 🇩🇿</td>
+              <td style="font-weight:600">TB SHOP  🇹🇳</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Dz shoppingg 🇩🇿</td>
+              <td style="font-weight:600">Jomla 🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Price Queen  🇩🇿</td>
+              <td style="font-weight:600">Bejaia shop 🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">صحا لينا  🇩🇿</td>
+              <td style="font-weight:600">ASYL DZ 🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">الجودة والأناقة  🇩🇿</td>
+              <td style="font-weight:600">Krimall 🇲🇦</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Reo Bello mobilya 🇩🇿</td>
+              <td style="font-weight:600">Flayshope 🇲🇦</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Soft Meubles Vip 🇩🇿</td>
+              <td style="font-weight:600">Happy market  🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Rukn Al-Anaka 🇩🇿</td>
+              <td style="font-weight:600">TPIvision  🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Kanabati 🇩🇿</td>
+              <td style="font-weight:600">2MAG STORE 🇲🇦</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Confort Maison 🇩🇿</td>
+              <td style="font-weight:600">Prixmark.ma 🇲🇦</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Meuble chic 1 🇩🇿</td>
+              <td style="font-weight:600">Top Shoptn 🇹🇳</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Sila Nova-Meubles 🇩🇿</td>
+              <td style="font-weight:600">Decorna 🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">R-dix meuble  🇩🇿</td>
+              <td style="font-weight:600">SHOP DWN 🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
             <tr>
-              <td style="font-weight:600">Salon Afrah 🇩🇿</td>
-              <td class="col-center">1</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">meuble hassan 🇩🇿</td>
-              <td class="col-center">1</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">Lux Verro 🇲🇦</td>
-              <td class="col-center">1</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">Maison Bois 🇲🇦</td>
-              <td class="col-center">1</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">Bergen Store 🇱🇾</td>
-              <td class="col-center">1</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">Deco Style 🇩🇿</td>
-              <td class="col-center">1</td>
-            </tr>
-          
-            <tr>
-              <td style="font-weight:600">Home Style 🇩🇿</td>
+              <td style="font-weight:600">DARI DECO  🇩🇿</td>
               <td class="col-center">1</td>
             </tr>
           
@@ -535,270 +593,251 @@
             </thead>
             <tbody id="productsBody">
               
-              <tr data-max-days="375" data-min-days="6" data-occ="20" data-cat="منزل">
-                <td style="font-weight:600">صالون</td>
+              <tr data-max-days="1021" data-min-days="181" data-occ="5" data-cat="أدوات سيارة">
+                <td style="font-weight:600">مكنسة محمولة</td>
                 <td>
                   <ul class="shops">
                     
                       <li>
-                        <a href="https://www.facebook.com/salons.brothers.maksoud/" target="_blank" rel="noopener">شركة صالونات الإخوة مقصود 🇩🇿</a>
-                        <span class="muted">(40 يوم • 5 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1918200838732787" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://jomla.ae/ar/product-tag/%d9%85%d9%83%d9%86%d8%b3%d8%a9-%d9%83%d9%87%d8%b1%d8%a8%d8%a7%d8%a6%d9%8a%d8%a9-%d9%84%d8%a7%d8%b3%d9%84%d9%83%d9%8a%d8%a9/" target="_blank" rel="noopener">Jomla 🇩🇿</a>
+                        <span class="muted">(1021 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=3506267456291901" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                       <li>
-                        <a href="https://www.facebook.com/help/396404120401278/list" target="_blank" rel="noopener">Marina Deco 🇩🇿</a>
-                        <span class="muted">(6 يوم • 4 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=864108656546193" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://bejaia-shop.com/products/aspirateur" target="_blank" rel="noopener">Bejaia shop 🇩🇿</a>
+                        <span class="muted">(218 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1816276818916661" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                       <li>
-                        <a href="https://www.facebook.com/61581434151605/" target="_blank" rel="noopener">الجودة والأناقة  🇩🇿</a>
+                        <a href="https://topshopdz1.myshopify.com/products/مكنسة-كهربائية-محمولة-تنظيف-احترافي-للمنزل-و-السيارة" target="_blank" rel="noopener">ASYL DZ 🇩🇿</a>
+                        <span class="muted">(304 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1019096740061482" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://api.whatsapp.com/send" target="_blank" rel="noopener">Krimall 🇲🇦</a>
+                        <span class="muted">(181 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=753843237201535" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://flayshope.com/products/miknasa" target="_blank" rel="noopener">Flayshope 🇲🇦</a>
+                        <span class="muted">(317 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=952246023642253" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge" title="Min–Max days running">
+                      <span class="badge-dot" style="background:var(--accent-1)"></span>
+                      أقل 181
+                    </div>
+                    <div class="badge" style="margin-left:8px;" title="Max days running">
+                      <span class="badge-dot"></span>
+                      أقصى 1021
+                    </div>
+                  
+                </td>
+                <td style="font-weight:700">5</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="306" data-min-days="38" data-occ="8" data-cat="تكنولوجيا">
+                <td style="font-weight:600">كاميرا مراقبة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://camstationpro.com/product/smart-battery-camera-4g/" target="_blank" rel="noopener">Happy market  🇩🇿</a>
+                        <span class="muted">(68 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1114615787509081" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://kd10ez-be.myshopify.com/products/imou-ranger-2-3mp%F0%9F%94%A5" target="_blank" rel="noopener">TPIvision  🇩🇿</a>
+                        <span class="muted">(306 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=598001696436514" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://thegoat.myecomsite.net/camera" target="_blank" rel="noopener">jibliaashop 🇲🇦</a>
+                        <span class="muted">(38 يوم • 3 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1367287974770512" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://h6c.ai2mag.com/itel-n1/" target="_blank" rel="noopener">2MAG STORE 🇲🇦</a>
+                        <span class="muted">(197 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=24283687924571922" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://prixmarkma.myshopify.com/products/360" target="_blank" rel="noopener">Prixmark.ma 🇲🇦</a>
+                        <span class="muted">(292 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1929547644564933" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://burkinastores.com/products/cameraaz" target="_blank" rel="noopener">Top Shoptn 🇹🇳</a>
+                        <span class="muted">(72 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=829232850040779" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge" title="Min–Max days running">
+                      <span class="badge-dot" style="background:var(--accent-1)"></span>
+                      أقل 38
+                    </div>
+                    <div class="badge" style="margin-left:8px;" title="Max days running">
+                      <span class="badge-dot"></span>
+                      أقصى 306
+                    </div>
+                  
+                </td>
+                <td style="font-weight:700">8</td>
+                <td><span class="badge" title="Category">تكنولوجيا</span></td>
+              </tr>
+              
+              <tr data-max-days="249" data-min-days="63" data-occ="5" data-cat="زينة">
+                <td style="font-weight:600">ركن صلاة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://kwlverso.a.ayor.ai/kwlverso/roknsalat" target="_blank" rel="noopener">Decorna 🇩🇿</a>
+                        <span class="muted">(63 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1544437283545440" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://liyahomewear.myecomsite.net/uGj_P2GEv7" target="_blank" rel="noopener">SHOP DWN 🇩🇿</a>
+                        <span class="muted">(63 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1324930029032926" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://darkoumdz.store/products/prod-n-1" target="_blank" rel="noopener">DARI DECO  🇩🇿</a>
+                        <span class="muted">(176 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=666494983079577" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://decoradz.okstore.shop/product/rkn-alsla/149828" target="_blank" rel="noopener">Décora Star DZ 🇩🇿</a>
+                        <span class="muted">(249 يوم • 2 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1313136343129005" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge" title="Min–Max days running">
+                      <span class="badge-dot" style="background:var(--accent-1)"></span>
+                      أقل 63
+                    </div>
+                    <div class="badge" style="margin-left:8px;" title="Max days running">
+                      <span class="badge-dot"></span>
+                      أقصى 249
+                    </div>
+                  
+                </td>
+                <td style="font-weight:700">5</td>
+                <td><span class="badge" title="Category">زينة</span></td>
+              </tr>
+              
+              <tr data-max-days="196" data-min-days="6" data-occ="22" data-cat="أدوات سيارة">
+                <td style="font-weight:600">غطاء سيارة</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://dzaiershop.myecomstore.net/collections/coverclmetal" target="_blank" rel="noopener">Luxe car  🇩🇿</a>
+                        <span class="muted">(196 يوم • 2 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1460564981601693" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://autoaccessoires.ma/coverline3/black_red" target="_blank" rel="noopener">Coverline 🇲🇦</a>
+                        <span class="muted">(6 يوم • 3 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1589423982075301" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://bacheauto.store/pages/bamautomoto" target="_blank" rel="noopener">Bâche Auto Maghreb 🇲🇦</a>
+                        <span class="muted">(23 يوم • 2 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1327005852513393" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://asrardeco6.shop/products/ghta-2" target="_blank" rel="noopener">Asrar Deco LB 🇱🇾</a>
+                        <span class="muted">(15 يوم • 8 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1671219850524255" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://cakado.com.tn/product/gt-lhmy-kml-lsyr?utm_medium=%7B%7Bcampaign.name%7D%7D&utm_campaign=%7B%7Badset.name%7D%7D&utm_content=%7B%7Bad.name%7D%7D&%20ad_id=%7B%7Bad.id%7D%7D&%0A%20adset_id=%7B%7Badset.id%7D%7D&%0A%20campaign_id=%7B%7Bcampaign.id%7D%7D&%0A%20placement=%7B%7Bplacement%7D%7D&%0A%20site_source_name=%7B%7Bsite_source_name%7D%7D&%0A%20cuid=mjgbu4qr370kw1tmu&fbclid=IwZXh0bgNhZW0CMTAAYnJpZBExRGFLaUI2ck1EVmVsbUtBTHNydGMGYXBwX2lkDzU0MTYzOTQ5Mzg4OTAyNQABHmVTy0exLLDtuzsxd0fi454aHye0rHFHz0_aEL14Yxf0Q9m6KDpHDzNzbTDF_aem_EB4dqqdPwWRVLqMWdqwVCw" target="_blank" rel="noopener">Cakado TN 🇹🇳</a>
+                        <span class="muted">(15 يوم • 6 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=844703081705216" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://tbshopp.com/product/housse-de-protection-complete-pour-voiture-ete-et-hiver" target="_blank" rel="noopener">TB SHOP  🇹🇳</a>
+                        <span class="muted">(76 يوم • 1 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1169560805169230" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                  </ul>
+                </td>
+                <td>
+                  
+                    <div class="badge" title="Min–Max days running">
+                      <span class="badge-dot" style="background:var(--accent-1)"></span>
+                      أقل 6
+                    </div>
+                    <div class="badge" style="margin-left:8px;" title="Max days running">
+                      <span class="badge-dot"></span>
+                      أقصى 196
+                    </div>
+                  
+                </td>
+                <td style="font-weight:700">22</td>
+                <td><span class="badge" title="Category">أدوات سيارة</span></td>
+              </tr>
+              
+              <tr data-max-days="16" data-min-days="6" data-occ="7" data-cat="منزل">
+                <td style="font-weight:600">مانع تسرب</td>
+                <td>
+                  <ul class="shops">
+                    
+                      <li>
+                        <a href="https://sellcod.store/products/8a93ec5d-a346-4a24-8746-4ab5fd6ce62b" target="_blank" rel="noopener">Hi store 🇲🇦</a>
+                        <span class="muted">(6 يوم • 3 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1525085035452805" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                      </li>
+                    
+                      <li>
+                        <a href="https://shorturl.at/LKuaW" target="_blank" rel="noopener">Mycatsy 🇲🇦</a>
                         <span class="muted">(7 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=891463253388522" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://www.facebook.com/ads/library/?id=889728163504963" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                       <li>
-                        <a href="https://www.facebook.com/ReoBelloMobilya/" target="_blank" rel="noopener">Reo Bello mobilya 🇩🇿</a>
-                        <span class="muted">(8 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=4441110496124728" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/100088742072310/" target="_blank" rel="noopener">Soft Meubles Vip 🇩🇿</a>
-                        <span class="muted">(14 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1998666037359483" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61577164628068/" target="_blank" rel="noopener">Rukn Al-Anaka 🇩🇿</a>
-                        <span class="muted">(15 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=726437153464097" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/100089665100714/" target="_blank" rel="noopener">Kanabati 🇩🇿</a>
-                        <span class="muted">(17 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1996336317602497" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61550014378178/" target="_blank" rel="noopener">Confort Maison 🇩🇿</a>
-                        <span class="muted">(26 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1765402624171439" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/100094705451333/" target="_blank" rel="noopener">Meuble chic 1 🇩🇿</a>
-                        <span class="muted">(26 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1375115860127566" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61577212506697/" target="_blank" rel="noopener">Sila Nova-Meubles 🇩🇿</a>
-                        <span class="muted">(26 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1275306081078003" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61575867025109/" target="_blank" rel="noopener">R-dix meuble  🇩🇿</a>
-                        <span class="muted">(28 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=895523296154085" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/Salon.Afrah.DZ/" target="_blank" rel="noopener">Salon Afrah 🇩🇿</a>
-                        <span class="muted">(33 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=2264706927346449" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/100089628668265/" target="_blank" rel="noopener">meuble hassan 🇩🇿</a>
-                        <span class="muted">(375 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=635161832183668" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                  </ul>
-                </td>
-                <td>
-                  
-                    <div class="badge" title="Min–Max days running">
-                      <span class="badge-dot" style="background:var(--accent-1)"></span>
-                      أقل 6
-                    </div>
-                    <div class="badge" style="margin-left:8px;" title="Max days running">
-                      <span class="badge-dot"></span>
-                      أقصى 375
-                    </div>
-                  
-                </td>
-                <td style="font-weight:700">20</td>
-                <td><span class="badge" title="Category">منزل</span></td>
-              </tr>
-              
-              <tr data-max-days="266" data-min-days="21" data-occ="4" data-cat="علاج">
-                <td style="font-weight:600">مشروب ذاكرة</td>
-                <td>
-                  <ul class="shops">
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61561082994732/" target="_blank" rel="noopener">Beauté shop 🇩🇿</a>
-                        <span class="muted">(21 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1534701084462533" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://bca-market.foorweb.store/memoryplusdzshopping" target="_blank" rel="noopener">Dz shoppingg 🇩🇿</a>
-                        <span class="muted">(45 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1165206765272180" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://cosmestore.foorweb.store/Landingpage/Malika-Dakira-Tarkiz" target="_blank" rel="noopener">Price Queen  🇩🇿</a>
-                        <span class="muted">(92 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1499356577961731" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://frero-shoop.foorweb.store/%D9%85%D8%B4%D8%B1%D9%88%D8%A8-%D8%A7%D9%84%D8%AC%D9%86%D9%83%D8%A9-%D8%A7%D9%84%D8%B7%D8%A8%D9%8A%D8%B9%D9%8A" target="_blank" rel="noopener">صحا لينا  🇩🇿</a>
-                        <span class="muted">(266 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1179875836695188" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                  </ul>
-                </td>
-                <td>
-                  
-                    <div class="badge" title="Min–Max days running">
-                      <span class="badge-dot" style="background:var(--accent-1)"></span>
-                      أقل 21
-                    </div>
-                    <div class="badge" style="margin-left:8px;" title="Max days running">
-                      <span class="badge-dot"></span>
-                      أقصى 266
-                    </div>
-                  
-                </td>
-                <td style="font-weight:700">4</td>
-                <td><span class="badge" title="Category">علاج</span></td>
-              </tr>
-              
-              <tr data-max-days="71" data-min-days="10" data-occ="38" data-cat="مطبخ">
-                <td style="font-weight:600">منظم مطبخ</td>
-                <td>
-                  <ul class="shops">
-                    
-                      <li>
-                        <a href="https://rivashopdz.foorweb.store/Landingpage/Organiz-FreeShipping" target="_blank" rel="noopener">Riva shop  🇩🇿</a>
-                        <span class="muted">(34 يوم • 13 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=2138131740265789" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.akfado.com/ar/%D9%85%D9%86%D8%B8%D9%85%20%D8%A3%D8%BA%D8%B1%D8%A7%D8%B6%20%D8%A7%D9%84%D9%85%D8%B7%D8%A8%D8%AE" target="_blank" rel="noopener">Finea 🇩🇿</a>
-                        <span class="muted">(13 يوم • 5 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=691489520561894" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://beecoshop.flexdz.store/products/details/6953c640c509d885b7496505" target="_blank" rel="noopener">Beeco Shop DZ 🇩🇿</a>
-                        <span class="muted">(16 يوم • 4 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=2663518537362111" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://rivashopdz.foorweb.store/Landingpage/Organiz" target="_blank" rel="noopener">Riva shop  🇩🇿</a>
-                        <span class="muted">(33 يوم • 2 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1524972975382571" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://midou-shop.com/produit/%d9%85%d8%ac%d9%81%d9%81-%d8%a7%d9%84%d8%a3%d9%88%d8%a7%d9%86%d9%8a-%d9%81%d9%88%d9%82-%d8%a7%d9%84%d8%ad%d9%88%d8%b6/" target="_blank" rel="noopener">Midou shop  🇩🇿</a>
-                        <span class="muted">(15 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1435084068177290" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://midou-shop.com/produit/%d8%ad%d8%a7%d9%85%d9%84-%d8%a7%d9%84%d8%b5%d8%ad%d9%88%d9%86-%d8%a7%d9%84%d9%82%d8%a7%d8%a8%d9%84-%d9%84%d9%84%d8%aa%d9%85%d8%af%d9%8a%d8%af/" target="_blank" rel="noopener">Midou shop  🇩🇿</a>
-                        <span class="muted">(32 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=2300797093757184" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://midou-shop.com/produit/%d8%ad%d8%a7%d9%85%d9%84-%d8%a7%d9%84%d8%b5%d8%ad%d9%88%d9%86-%d9%81%d9%88%d9%82-%d8%a7%d9%84%d8%ad%d9%88%d8%b6/" target="_blank" rel="noopener">Midou shop  🇩🇿</a>
-                        <span class="muted">(37 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1866378364265271" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://mobilart.ma/products/organisateur-de-cuisine" target="_blank" rel="noopener">MobilArt.ma - Meubles et décoration 🇲🇦</a>
-                        <span class="muted">(16 يوم • 8 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=2667092917010029" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://luxverro.youcan.store/products/mnthm-almtbkh-alfolathy-inoxydable-1" target="_blank" rel="noopener">Lux Verro 🇲🇦</a>
-                        <span class="muted">(53 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=870680498712821" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://maisonbois.store/products/rangement-flexbois" target="_blank" rel="noopener">Maison Bois 🇲🇦</a>
-                        <span class="muted">(71 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=833005416086113" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/bergen.store.Ly/" target="_blank" rel="noopener">Bergen Store 🇱🇾</a>
-                        <span class="muted">(10 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=2334002437072876" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                  </ul>
-                </td>
-                <td>
-                  
-                    <div class="badge" title="Min–Max days running">
-                      <span class="badge-dot" style="background:var(--accent-1)"></span>
-                      أقل 10
-                    </div>
-                    <div class="badge" style="margin-left:8px;" title="Max days running">
-                      <span class="badge-dot"></span>
-                      أقصى 71
-                    </div>
-                  
-                </td>
-                <td style="font-weight:700">38</td>
-                <td><span class="badge" title="Category">مطبخ</span></td>
-              </tr>
-              
-              <tr data-max-days="34" data-min-days="6" data-occ="7" data-cat="أدوات سيارة">
-                <td style="font-weight:600">شاحن سيارة</td>
-                <td>
-                  <ul class="shops">
-                    
-                      <li>
-                        <a href="https://shopping-on-click.foorweb.store/Chargeurdebatterieintelligent12V8A" target="_blank" rel="noopener">Shopping on click 🇩🇿</a>
+                        <a href="https://elegencestore.site/products/oaky-sylykon-anyk-ofaaal-lmtbkhk-ohmamk-copy-1" target="_blank" rel="noopener">City market 🇲🇦</a>
                         <span class="muted">(6 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=888406266923741" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://www.facebook.com/ads/library/?id=2591146857922797" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                       <li>
-                        <a href="https://fefraz-sr.myshopify.com/products/%D8%B4%D8%A7%D8%AD%D9%86-%D8%B3%D9%8A%D8%A7%D8%B1%D8%A9-%D9%81%D8%A7%D8%A6%D9%82-%D8%A7%D9%84%D8%B3%D8%B1%D8%B9%D8%A9-4-1" target="_blank" rel="noopener">iMix shop  🇩🇿</a>
-                        <span class="muted">(8 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1405335334330275" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://mouddeneshop.ma/pages/car-charger-4-in-1" target="_blank" rel="noopener">Galaxy home 🇲🇦</a>
-                        <span class="muted">(34 يوم • 2 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=832232649612429" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://perfex.tn/product/shhn-syr-dhky-fkhr-tsmym-mstqbly-b-d-aaly" target="_blank" rel="noopener">PerfEx 🇹🇳</a>
-                        <span class="muted">(8 يوم • 3 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=886558777066456" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
+                        <a href="https://libyaboutique.youcan.store/products/waterproof-glue" target="_blank" rel="noopener">ماركت ليبيا للتسوق 🇱🇾</a>
+                        <span class="muted">(16 يوم • 2 تكرار)</span>
+                        <a href="https://www.facebook.com/ads/library/?id=1655374055432885" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
                       </li>
                     
                   </ul>
@@ -811,58 +850,11 @@
                     </div>
                     <div class="badge" style="margin-left:8px;" title="Max days running">
                       <span class="badge-dot"></span>
-                      أقصى 34
+                      أقصى 16
                     </div>
                   
                 </td>
                 <td style="font-weight:700">7</td>
-                <td><span class="badge" title="Category">أدوات سيارة</span></td>
-              </tr>
-              
-              <tr data-max-days="21" data-min-days="7" data-occ="6" data-cat="منزل">
-                <td style="font-weight:600">طاولة صغيرة</td>
-                <td>
-                  <ul class="shops">
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61559983358702/" target="_blank" rel="noopener">Deco Style 🇩🇿</a>
-                        <span class="muted">(7 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1389087446008718" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61572090363778/" target="_blank" rel="noopener">Artéva 🇩🇿</a>
-                        <span class="muted">(11 يوم • 2 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=908541941602517" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://big-decoration.foorweb.store/T02" target="_blank" rel="noopener">Big Décoration + 🇩🇿</a>
-                        <span class="muted">(13 يوم • 2 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1925497474989805" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                      <li>
-                        <a href="https://www.facebook.com/61555756287957/" target="_blank" rel="noopener">Home Style 🇩🇿</a>
-                        <span class="muted">(21 يوم • 1 تكرار)</span>
-                        <a href="https://www.facebook.com/ads/library/?id=1425587495597197" target="_blank" rel="noopener" class="muted">(الإعلان)</a>
-                      </li>
-                    
-                  </ul>
-                </td>
-                <td>
-                  
-                    <div class="badge" title="Min–Max days running">
-                      <span class="badge-dot" style="background:var(--accent-1)"></span>
-                      أقل 7
-                    </div>
-                    <div class="badge" style="margin-left:8px;" title="Max days running">
-                      <span class="badge-dot"></span>
-                      أقصى 21
-                    </div>
-                  
-                </td>
-                <td style="font-weight:700">6</td>
                 <td><span class="badge" title="Category">منزل</span></td>
               </tr>
               
@@ -887,24 +879,24 @@
             </thead>
             <tbody id="adcopyBody">
               
-              <tr data-days="89" data-occ="5" data-cat="أدوات سيارة">
-                <td style="font-weight:600"><a href="https://www.sakerplus.shop/products/nitoshine" target="_blank" rel="noopener">SAKER PLUS Tunisie  🇹🇳</a></td>
-                <td>✨ العناية اللي تستحقها سيارتك🧴 استعمل Clean All Polisher – تلميع راقٍ بطبقة شمع الكارناوبا💎 حماية، لمعان، وأناقة تدوم لأيام✅ سهل الاستعمال✅ نتائج فورية✅ مظهر احترافي من أول استعمال📦 الدفع عند الاستلام✨ سيارتك… خليها تحكي عالأناقة بنفسهاhttps://www.sakerplus.shop/products/nitoshine <a href="https://www.facebook.com/ads/library/?id=823799960623227" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
-                <td>89</td>
-                <td style="font-weight:700">5</td>
+              <tr data-days="60" data-occ="7" data-cat="أدوات سيارة">
+                <td style="font-weight:600"><a href="https://zarbia-tapis-luxe.youcan.store/products/zarbiaa" target="_blank" rel="noopener">Zarbia Tapis Luxe 🇲🇦</a></td>
+                <td>😱 حبس حبس حبس! جبنا ليك الحل ليوم! 😱 عييتي من مظهر سيارتك العادي؟ بغيتي لمسة ديال الفخامة والتميز؟🎯 جبنا ليك سجادة السيارة الفاخرة بنقشة عربية أصيلة! تصميم تراثي فريد كيعطي جمالية خطيرة للطوموبيل ديالك وكيلفت الأنظار!✨ واستافد دابا من تخفيض حصري %50! ✨✅- كتزيد جمالية خيالية للسيارة وكتعبر على الذوق الرفيع. ✅- نقشة عربية أصيلة وتصميم فاخر.✅- قماش فاخر مضاد للانزلاق (كتبقى ثابتة 100% ومكتحركش أثناء السياقة).✅- ساهلة بزاف في التنظيف ومقاومة للأوساخ. ✅- كتغطي 90% من مساحة السيارة. ✅- ساهلة في التركيب وكتبقى لاصقة في بلاصتها.✅- الدفع عند رؤية المنتوج و استلامه. (متخلص تا تشوف السلعة بعينيك!)👈 باش تطلبها، اتصل بينا دابا على الرقم: 📞 0780-140354 <a href="https://www.facebook.com/ads/library/?id=25613236794928583" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>60</td>
+                <td style="font-weight:700">7</td>
               </tr>
               
-              <tr data-days="15" data-occ="6" data-cat="مطبخ">
-                <td style="font-weight:600"><a href="https://shrxe6-kb.myshopify.com/products/hachoir-rotatif-manuel" target="_blank" rel="noopener">BAY SHOP 🇱🇾</a></td>
-                <td>قطّع، إبشر، ووفّر وقتك في المطبخ! هل تعبتِ من التقطيع اليدوي والبُطء؟مع المبشرة الدوّارة اليدوية متعددة الاستعمالات كل شيء يصبح أسرع وأسهل  تقطيع الخضر في ثواني بشر الجبن، البطاطا، الجزر، الخيار… شفرات حادة من الستانلس ستيل آمنة على اليدين – بدون كهرباء سهلة الفك والتنظيف وفّري وقتك وجهدك نتائج احترافية في مطبخك مناسبة لكل بيت اطلبِيها الآن واستمتعي بالطبخ بدون تعب توصيل سريع | 💰 سعر مناسب | ⭐ جودة مضمونة <a href="https://www.facebook.com/ads/library/?id=1364489128232302" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
-                <td>15</td>
-                <td style="font-weight:700">6</td>
+              <tr data-days="81" data-occ="4" data-cat="أدوات سيارة">
+                <td style="font-weight:600"><a href="https://mallecity.shop/landing/led" target="_blank" rel="noopener">Somacavel 🇲🇦</a></td>
+                <td>أأضف لمسة من الأناقة والأمان لسيارتك!جدد مظهر سيارتك مع شريط SAMURAI CARBON المتطور للأضواء الخلفية. يتميز هذا الشريط بسهولة التركيب والتصميم العصري الذي يُبرز جمال سيارتك في كل الأوقات. • وضوح مثالي: يُظهر أضواء واضحة في النهار لتنبيه السائقين من الخلف. • أمان إضافي: عند الضغط على الفرامل، يُصدر ضوءاً قوياً لجذب الانتباه وحماية سيارتك. • تحكم متطور: إشارات الاتجاه تعمل بسلاسة، مما يضمن وضوح كل حركة.استثمر في جمال سيارتك وأمانها ، لطلب إضغط على الرابط أو اسفل الفيديو https://mallecity.shop/landing/led <a href="https://www.facebook.com/ads/library/?id=1525355695133041" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>81</td>
+                <td style="font-weight:700">4</td>
               </tr>
               
-              <tr data-days="6" data-occ="4" data-cat="مطبخ">
-                <td style="font-weight:600"><a href="https://trendyshopdz.shop/products/pack-8-pieces-electromenager-050" target="_blank" rel="noopener">Trendy SHOP 🇩🇿</a></td>
-                <td>عرض خاص بمناسبة شهر رمضان لا تضيع الفرصة 🔥 راك حاب تعمر المطبخ تاعك بأفضل الأجهزة الكهرومنزلية ؟ و مالقيتش واش يساعدك و زيد الأسعار راهي غالية بزاف🔥؟جبنالك أقوى عرض للمطبخ 8 أجهزة كهرومنزلية 🎁** عرض مناسب جدا ل : الأسر والعائلات , الأزواج الجدد , المتقاعدون وكبار السن , محبو الطهي والطهاة الهواة , أصحاب المنازل الجديدة و الأسر ذات الأطفال الصغار و لجميع الأشخاص **لا تنتظر أكثر! قم بتجهيز مطبخك بأحدث الأجهزة الكهرومنزلية اليوم واستمتع بحياة منزلية أسهل وأكثر سعادة - للطلب زر موقعنا :  https://trendyshopdz.shop/products/pack-8-pieces-electromenager-050ضمان على كل المنتجات و توصيل متوفر حتى باب الدار و الدفع عند الإستلامLow impression count <a href="https://www.facebook.com/ads/library/?id=764951786637939" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
-                <td>6</td>
+              <tr data-days="131" data-occ="4" data-cat="أدوات سيارة">
+                <td style="font-weight:600"><a href="https://privilegia.click/lp1/bande-de-voiture/fcb/1370748260526308" target="_blank" rel="noopener">Chic shop 🇲🇦</a></td>
+                <td>عندك مشكل مع باب الطوموبيل؟ واخا تخبط فيه حتى تعيا، ماكتسدش... حنا عارفين داك الإحساس لي كيطلع الدم 😤جبنا ليك الحل النهائي: الجوان الأصلي اللاصق لي غادي يرجع الحياة لبيبان سيارتك!✅ إغلاق مثالي: غادي يولي الباب يتسد بسلاسة وبصوت مكتوم، وغادي تنسى شي حاجة سميتها "عاود سد الباب.✅ عزل كامل: غادي يهنيك من صداع الريح، الغبرة، وحتى تسربات الماء ديال الشتا.✅ تركيب ف 5 دقايق: ما تحتاج لا معلم لا والو! فيه اللصقة ديالو، ركبو بوحدك وتهنى.هذا هو التغيير الصغير لي غادي يرجع ليك قيمة وراحة سيارتك.للطلب، اضغط على الرابط لتحت مباشرة:  https://2u.pw/jsuIJالتوصيل لجميع المدن! 🚚 <a href="https://www.facebook.com/ads/library/?id=766417642858067" target="_blank" rel="noopener" class="muted">(الإعلان)</a></td>
+                <td>131</td>
                 <td style="font-weight:700">4</td>
               </tr>
               
